@@ -4,6 +4,7 @@
   font-family: "Poppins", sans-serif;
   font-variation-settings: normal;
   --font-family: "Poppins", sans-serif;
+  --font-size: .9rem;
   --text-color: #5a646e;
   --text-color-secondary: #404448; 
   
@@ -198,13 +199,33 @@
   --purple-800:#5c2f88;
   --purple-900:#432263;
 }
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  &:not([class*=p-]){
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+  }
+}
 
 body { 
   font-family: 'Poppins', sans-serif;
   font-size: var(--font-size);
   font-weight: normal;
   line-height: normal;
-  color: var(--surface-600);
+  color: var(--surface-700);
   text-align: left;
   background-color: var(--surface-50);
 }
@@ -232,7 +253,7 @@ app-root > span > router-outlet + *{
 }
 .p-editor-container .p-editor-toolbar.ql-snow .ql-picker .ql-picker-label {
   border: 0 none;
-  color: var(--surface-500);
+  color: var(--surface-700);
 }
 .p-editor-container .p-editor-toolbar.ql-snow .ql-picker .ql-picker-label:hover {
   color: var(--surface-400);
@@ -329,7 +350,7 @@ app-root > span > router-outlet + *{
 
   .p-component {
     font-family: var(--font-family);
-    font-size: 1rem;
+    font-size: var(--font-size);
     font-weight: normal;
   }
 
@@ -351,7 +372,7 @@ app-root > span > router-outlet + *{
   }
 
   .pi {
-    font-size: 1rem;
+    font-size: var(--font-size);
   }
 
   .p-icon {
@@ -361,7 +382,7 @@ app-root > span > router-outlet + *{
 
   .p-link {
     font-family: var(--font-family);
-    font-size: 1rem;
+    font-size: var(--font-size);
     border-radius: 6px;
   }
   .p-link:focus-visible {
@@ -419,7 +440,7 @@ app-root > span > router-outlet + *{
   }
   .p-autocomplete .p-autocomplete-multiple-container .p-autocomplete-input-token input {
     font-family: var(--font-family);
-    font-size: 1rem;
+    font-size: var(--font-size);
     color: var(--surface-400);
     padding: 0;
     margin: 0;
@@ -464,8 +485,8 @@ app-root > span > router-outlet + *{
     margin-top: 0;
   }
   .p-autocomplete-panel .p-autocomplete-items .p-autocomplete-item.p-highlight {
-    color: #1D4ED8;
-    background: #EFF6FF;
+    color: var(--primary-600);
+    background: var(--surface-50);
   }
   .p-autocomplete-panel .p-autocomplete-items .p-autocomplete-item.p-highlight.p-focus {
     background: rgba(59, 130, 246, 0.24);
@@ -584,7 +605,7 @@ app-root > span > router-outlet + *{
     margin-right: 0.5rem;
   }
   .p-datepicker table {
-    font-size: 1rem;
+    font-size: var(--font-size);
     margin: 0.5rem 0;
   }
   .p-datepicker table th {
@@ -605,8 +626,8 @@ app-root > span > router-outlet + *{
     border: 1px solid transparent;
   }
   .p-datepicker table td > span.p-highlight {
-    color: #1D4ED8;
-    background: #EFF6FF;
+    color: var(--primary-600);
+    background: var(--surface-50);
   }
   .p-datepicker table td > span:focus {
     outline: 0 none;
@@ -619,8 +640,8 @@ app-root > span > router-outlet + *{
     border-color: transparent;
   }
   .p-datepicker table td.p-datepicker-today > span.p-highlight {
-    color: #1D4ED8;
-    background: #EFF6FF;
+    color: var(--primary-600);
+    background: var(--surface-50);
   }
   .p-datepicker .p-datepicker-buttonbar {
     padding: 1rem 0;
@@ -673,8 +694,8 @@ app-root > span > router-outlet + *{
     border-radius: 6px;
   }
   .p-datepicker .p-monthpicker .p-monthpicker-month.p-highlight {
-    color: #1D4ED8;
-    background: #EFF6FF;
+    color: var(--primary-600);
+    background: var(--surface-50);
   }
   .p-datepicker .p-yearpicker {
     margin: 0.5rem 0;
@@ -685,8 +706,8 @@ app-root > span > router-outlet + *{
     border-radius: 6px;
   }
   .p-datepicker .p-yearpicker .p-yearpicker-year.p-highlight {
-    color: #1D4ED8;
-    background: #EFF6FF;
+    color: var(--primary-600);
+    background: var(--surface-50);
   }
   .p-datepicker.p-datepicker-multiple-month .p-datepicker-group {
     border-left: 1px solid #e5e7eb;
@@ -814,8 +835,8 @@ app-root > span > router-outlet + *{
     margin-top: 0;
   }
   .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item.p-highlight {
-    color: #1D4ED8;
-    background: #EFF6FF;
+    color: var(--primary-600);
+    background: var(--surface-50);
   }
   .p-cascadeselect-panel .p-cascadeselect-items .p-cascadeselect-item.p-highlight.p-focus {
     background: rgba(59, 130, 246, 0.24);
@@ -903,8 +924,8 @@ app-root > span > router-outlet + *{
     border-color: var(--primary-500);
   }
   .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
-    border-color: #1D4ED8;
-    background: #1D4ED8;
+    border-color: var(--primary-600);
+    background: var(--primary-600);
     color: var(--surface-0);
   }
   .p-checkbox.p-variant-filled .p-checkbox-box {
@@ -917,7 +938,7 @@ app-root > span > router-outlet + *{
     background-color: var(--surface-50);
   }
   .p-checkbox.p-variant-filled:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
-    background: #1D4ED8;
+    background: var(--primary-600);
   }
 
   p-checkbox.ng-dirty.ng-invalid > .p-checkbox > .p-checkbox-box {
@@ -934,7 +955,7 @@ app-root > span > router-outlet + *{
     background-color: var(--surface-50);
   }
   .p-input-filled .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
-    background: #1D4ED8;
+    background: var(--primary-600);
   }
 
   .p-checkbox-label {
@@ -977,7 +998,7 @@ app-root > span > router-outlet + *{
   }
   .p-chips .p-chips-multiple-container .p-chips-input-token input {
     font-family: var(--font-family);
-    font-size: 1rem;
+    font-size: var(--font-size);
     color: var(--surface-400);
     padding: 0;
     margin: 0;
@@ -1107,8 +1128,8 @@ app-root > span > router-outlet + *{
     margin-top: 0;
   }
   .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
-    color: #1D4ED8;
-    background: #EFF6FF;
+    color: var(--primary-600);
+    background: var(--surface-50);
   }
   .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight.p-focus {
     background: rgba(59, 130, 246, 0.24);
@@ -1335,7 +1356,7 @@ app-root > span > router-outlet + *{
     background: var(--surface-0);
   }
   .p-inputswitch.p-inputswitch-checked:not(.p-disabled):hover .p-inputswitch-slider {
-    background: #2563eb;
+    background: var(--primary-400);
   }
 
   p-inputswitch.ng-dirty.ng-invalid > .p-inputswitch > .p-inputswitch-slider {
@@ -1344,23 +1365,45 @@ app-root > span > router-outlet + *{
 
   .p-inputtext {
     font-family: var(--font-family);
-    font-size: 1rem;
+    font-size: var(--font-size);
     color: var(--surface-400);
-    background: var(--surface-0);
-    padding: 0.75rem 0.75rem;
-    border: 1px solid #d1d5db;
+    background: color-mix(in srgb, var(--surface-0), transparent 70%);
+    padding: 0.6rem 0.6rem;
+    border: 2px solid color-mix(in srgb, var(--surface-50), var(--surface-100) 50%);
+    border-radius: var(--border-radius);
+    box-shadow:
+      inset 2px 2px 4px color-mix(in srgb, var(--surface-200), var(--surface-100) 50%),
+      inset -3px -3px 6px var(--surface-0),
+      0px 0px 0px transparent,
+      0px 0px 0px transparent,
+      0 0 0 0px transparent,
+      inset 0 0 0 0px transparent;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
     appearance: none;
-    border-radius: 6px;
   }
   .p-inputtext:enabled:hover {
+    background: color-mix(in srgb, var(--surface-0), transparent 10%);
     border-color: var(--primary-500);
+    box-shadow:
+      inset 3px 3px 6px var(--surface-200),
+      inset -3px -3px 6px var(--surface-0),
+      0px 0px 0px var(--surface-100),
+      0px 0px 0px var(--surface-0),
+      0 0 0 3px color-mix(in srgb, var(--primary-500), transparent 80%),
+      inset 0 0 0 3px color-mix(in srgb, var(--primary-500), transparent 80%);
   }
   .p-inputtext:enabled:focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--primary-50);
-    border-color: var(--primary-500);
+    background: color-mix(in srgb, var(--surface-0), transparent 50%);
+    border-color: transparent;
+    box-shadow:
+      inset 0px 0px 0px var(--surface-200),
+      inset 0px 0px 0px var(--surface-0),
+      2px 2px 4px color-mix(in srgb, var(--primary-500), var(--surface-100) 50%),
+      -2px -2px 3px var(--surface-0),
+      0 0 0 0px color-mix(in srgb, var(--primary-500), transparent 70%),
+      inset 0 0 0 0px color-mix(in srgb, var(--primary-500), transparent 70%);
   }
   .p-inputtext.ng-dirty.ng-invalid {
     border-color: var(--red-500);
@@ -1430,19 +1473,19 @@ app-root > span > router-outlet + *{
   }
 
   ::-webkit-input-placeholder {
-    color: var(--surface-500);
+    color: var(--surface-300);
   }
 
   :-moz-placeholder {
-    color: var(--surface-500);
+    color: var(--surface-300);
   }
 
   ::-moz-placeholder {
-    color: var(--surface-500);
+    color: var(--surface-300);
   }
 
   :-ms-input-placeholder {
-    color: var(--surface-500);
+    color: var(--surface-300);
   }
 
   .p-input-filled .p-inputtext {
@@ -1507,8 +1550,8 @@ app-root > span > router-outlet + *{
     margin-top: 0;
   }
   .p-listbox .p-listbox-list .p-listbox-item.p-highlight {
-    color: #1D4ED8;
-    background: #EFF6FF;
+    color: var(--primary-600);
+    background: var(--surface-50);
   }
   .p-listbox .p-listbox-list .p-listbox-item .p-checkbox {
     margin-right: 0.5rem;
@@ -1674,8 +1717,8 @@ app-root > span > router-outlet + *{
     margin-top: 0;
   }
   .p-multiselect-panel .p-multiselect-items .p-multiselect-item.p-highlight {
-    color: #1D4ED8;
-    background: #EFF6FF;
+    color: var(--primary-600);
+    background: var(--surface-50);
   }
   .p-multiselect-panel .p-multiselect-items .p-multiselect-item.p-highlight.p-focus {
     background: rgba(59, 130, 246, 0.24);
@@ -1794,8 +1837,8 @@ app-root > span > router-outlet + *{
     background: var(--primary-500);
   }
   .p-radiobutton .p-radiobutton-box.p-highlight:not(.p-disabled):hover {
-    border-color: #1D4ED8;
-    background: #1D4ED8;
+    border-color: var(--primary-600);
+    background: var(--primary-600);
     color: var(--surface-0);
   }
   .p-radiobutton.p-variant-filled .p-radiobutton-box {
@@ -1808,7 +1851,7 @@ app-root > span > router-outlet + *{
     background: var(--primary-500);
   }
   .p-radiobutton.p-variant-filled .p-radiobutton-box.p-highlight:not(.p-disabled):hover {
-    background: #1D4ED8;
+    background: var(--primary-600);
   }
 
   p-radiobutton.ng-dirty.ng-invalid > .p-radiobutton > .p-radiobutton-box {
@@ -1825,7 +1868,7 @@ app-root > span > router-outlet + *{
     background: var(--primary-500);
   }
   .p-input-filled .p-radiobutton .p-radiobutton-box.p-highlight:not(.p-disabled):hover {
-    background: #1D4ED8;
+    background: var(--primary-600);
   }
 
   .p-radiobutton-label {
@@ -1898,8 +1941,8 @@ app-root > span > router-outlet + *{
     color: var(--surface-0);
   }
   .p-selectbutton .p-button.p-highlight:hover {
-    background: #2563eb;
-    border-color: #2563eb;
+    background: var(--primary-400);
+    border-color: var(--primary-400);
     color: var(--surface-0);
   }
   .p-selectbutton .p-button.p-highlight:hover .p-button-icon-left,
@@ -1995,8 +2038,8 @@ app-root > span > router-outlet + *{
     color: var(--surface-0);
   }
   .p-togglebutton.p-button.p-highlight:hover {
-    background: #2563eb;
-    border-color: #2563eb;
+    background: var(--primary-400);
+    border-color: var(--primary-400);
     color: var(--surface-0);
   }
   .p-togglebutton.p-button.p-highlight:hover .p-button-icon-left,
@@ -2142,23 +2185,26 @@ app-root > span > router-outlet + *{
 
   .p-button {
     color: var(--surface-0);
-    background: var(--primary-500);
-    border: 1px solid var(--primary-500);
+    background: linear-gradient(-15deg,var(--primary-500), var(--primary-400));
+    border: 1px solid transparent;
     padding: 0.75rem 1.25rem;
-    font-size: 1rem;
+    font-size: var(--font-size);
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
     border-radius: 6px;
     outline-color: transparent;
+    box-shadow: 
+      2px 2px 4px color-mix(in srgb, var(--surface-300), var(--surface-100) 50%),
+      -2px -2px 3px var(--surface-0);
   }
   .p-button:not(:disabled):hover {
-    background: #2563eb;
+    background: linear-gradient(-15deg,var(--primary-400), var(--primary-300));
     color: var(--surface-0);
-    border-color: #2563eb;
+    border-color: transparent;
   }
   .p-button:not(:disabled):active {
-    background: #1D4ED8;
+    background: linear-gradient(-15deg,var(--primary-600), var(--primary-500));
+    border-color: transparent;
     color: var(--surface-0);
-    border-color: #1D4ED8;
   }
   .p-button.p-button-outlined {
     background-color: transparent;
@@ -2637,13 +2683,13 @@ app-root > span > router-outlet + *{
   }
 
   .p-button.p-button-link {
-    color: #1D4ED8;
+    color: var(--primary-600);
     background: transparent;
     border: transparent;
   }
   .p-button.p-button-link:not(:disabled):hover {
     background: transparent;
-    color: #1D4ED8;
+    color: var(--primary-600);
     border-color: transparent;
   }
   .p-button.p-button-link:not(:disabled):hover .p-button-label {
@@ -2656,7 +2702,7 @@ app-root > span > router-outlet + *{
   }
   .p-button.p-button-link:not(:disabled):active {
     background: transparent;
-    color: #1D4ED8;
+    color: var(--primary-600);
     border-color: transparent;
   }
 
@@ -2792,8 +2838,8 @@ app-root > span > router-outlet + *{
     background: #9ca3af;
   }
   .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
-    background: #EFF6FF;
-    color: #1D4ED8;
+    background: var(--surface-50);
+    color: var(--primary-600);
   }
 
   .p-datatable .p-paginator-top {
@@ -2848,8 +2894,8 @@ app-root > span > router-outlet + *{
     height: 1.143rem;
     min-width: 1.143rem;
     line-height: 1.143rem;
-    color: #1D4ED8;
-    background: #EFF6FF;
+    color: var(--primary-600);
+    background: var(--surface-50);
     margin-left: 0.5rem;
   }
   .p-datatable .p-sortable-column:not(.p-highlight):hover {
@@ -2860,18 +2906,18 @@ app-root > span > router-outlet + *{
     color: var(--surface-700);
   }
   .p-datatable .p-sortable-column.p-highlight {
-    background: #EFF6FF;
-    color: #1D4ED8;
+    background: var(--surface-50);
+    color: var(--primary-600);
   }
   .p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon {
-    color: #1D4ED8;
+    color: var(--primary-600);
   }
   .p-datatable .p-sortable-column.p-highlight:hover {
-    background: #EFF6FF;
-    color: #1D4ED8;
+    background: var(--surface-50);
+    color: var(--primary-600);
   }
   .p-datatable .p-sortable-column.p-highlight:hover .p-sortable-column-icon {
-    color: #1D4ED8;
+    color: var(--primary-600);
   }
   .p-datatable .p-sortable-column:focus-visible {
     box-shadow: inset 0 0 0 0.15rem var(--primary-50);
@@ -2924,14 +2970,14 @@ app-root > span > router-outlet + *{
     outline-offset: -0.15rem;
   }
   .p-datatable .p-datatable-tbody > tr.p-highlight {
-    background: #EFF6FF;
-    color: #1D4ED8;
+    background: var(--surface-50);
+    color: var(--primary-600);
   }
   .p-datatable .p-datatable-tbody > tr.p-datatable-dragpoint-top > td {
-    box-shadow: inset 0 2px 0 0 #EFF6FF;
+    box-shadow: inset 0 2px 0 0 var(--surface-50);
   }
   .p-datatable .p-datatable-tbody > tr.p-datatable-dragpoint-bottom > td {
-    box-shadow: inset 0 -2px 0 0 #EFF6FF;
+    box-shadow: inset 0 -2px 0 0 var(--surface-50);
   }
   .p-datatable.p-datatable-hoverable-rows .p-datatable-tbody > tr:not(.p-highlight):hover {
     background: var(--surface-50);
@@ -3010,14 +3056,14 @@ app-root > span > router-outlet + *{
     background: #f8f8fa;
   }
   .p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(even).p-highlight {
-    background: #EFF6FF;
-    color: #1D4ED8;
+    background: var(--surface-50);
+    color: var(--primary-600);
   }
   .p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(even).p-highlight .p-row-toggler {
-    color: #1D4ED8;
+    color: var(--primary-600);
   }
   .p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(even).p-highlight .p-row-toggler:hover {
-    color: #1D4ED8;
+    color: var(--primary-600);
   }
   .p-datatable.p-datatable-sm .p-datatable-header {
     padding: 0.5rem 0.5rem;
@@ -3113,8 +3159,8 @@ app-root > span > router-outlet + *{
     color: var(--surface-700);
   }
   .p-column-filter-menu-button.p-column-filter-menu-button-active, .p-column-filter-menu-button.p-column-filter-menu-button-active:hover {
-    background: #EFF6FF;
-    color: #1D4ED8;
+    background: var(--surface-50);
+    color: var(--primary-600);
   }
   .p-column-filter-menu-button:focus-visible {
     outline: 0 none;
@@ -3166,8 +3212,8 @@ app-root > span > router-outlet + *{
     margin-top: 0;
   }
   .p-column-filter-overlay .p-column-filter-row-items .p-column-filter-row-item.p-highlight {
-    color: #1D4ED8;
-    background: #EFF6FF;
+    color: var(--primary-600);
+    background: var(--surface-50);
   }
   .p-column-filter-overlay .p-column-filter-row-items .p-column-filter-row-item:not(.p-highlight):not(.p-disabled):hover {
     color: var(--surface-400);
@@ -3280,8 +3326,8 @@ app-root > span > router-outlet + *{
     background: #e5e7eb;
   }
   .p-orderlist .p-orderlist-list .p-orderlist-item.p-highlight {
-    color: #1D4ED8;
-    background: #EFF6FF;
+    color: var(--primary-600);
+    background: var(--surface-50);
   }
   .p-orderlist .p-orderlist-list .p-orderlist-item.p-highlight.p-focus {
     background: rgba(59, 130, 246, 0.24);
@@ -3315,8 +3361,8 @@ app-root > span > router-outlet + *{
     color: var(--surface-400);
   }
   .p-organizationchart .p-organizationchart-node-content.p-highlight {
-    background: #EFF6FF;
-    color: #1D4ED8;
+    background: var(--surface-50);
+    color: var(--primary-600);
   }
   .p-organizationchart .p-organizationchart-node-content.p-highlight .p-node-toggler i {
     color: #70aeff;
@@ -3421,9 +3467,9 @@ app-root > span > router-outlet + *{
     border-radius: 50%;
   }
   .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
-    background: #EFF6FF;
-    border-color: #EFF6FF;
-    color: #1D4ED8;
+    background: var(--surface-50);
+    border-color: var(--surface-50);
+    color: var(--primary-600);
   }
   .p-paginator .p-paginator-pages .p-paginator-page:not(.p-highlight):hover {
     background: var(--surface-50);
@@ -3499,8 +3545,8 @@ app-root > span > router-outlet + *{
     background: #e5e7eb;
   }
   .p-picklist .p-picklist-list .p-picklist-item.p-highlight {
-    color: #1D4ED8;
-    background: #EFF6FF;
+    color: var(--primary-600);
+    background: var(--surface-50);
   }
   .p-picklist .p-picklist-list .p-picklist-item.p-highlight.p-focus {
     background: rgba(59, 130, 246, 0.24);
@@ -3615,19 +3661,19 @@ app-root > span > router-outlet + *{
     background-color: var(--surface-50);
   }
   .p-tree .p-tree-container .p-treenode .p-treenode-content .p-checkbox.p-variant-filled:not(.p-disabled) .p-checkbox-box.p-highlight:hover {
-    background: #1D4ED8;
+    background: var(--primary-600);
   }
   .p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight {
-    background: #EFF6FF;
-    color: #1D4ED8;
+    background: var(--surface-50);
+    color: var(--primary-600);
   }
   .p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight .p-tree-toggler,
 .p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight .p-treenode-icon {
-    color: #1D4ED8;
+    color: var(--primary-600);
   }
   .p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight .p-tree-toggler:hover,
 .p-tree .p-tree-container .p-treenode .p-treenode-content.p-highlight .p-treenode-icon:hover {
-    color: #1D4ED8;
+    color: var(--primary-600);
   }
   .p-tree .p-tree-container .p-treenode .p-treenode-content.p-treenode-selectable:not(.p-highlight):hover {
     background: var(--surface-50);
@@ -3670,11 +3716,11 @@ app-root > span > router-outlet + *{
     transition: box-shadow 0.2s;
   }
   .p-tree.p-tree-horizontal .p-treenode .p-treenode-content.p-highlight {
-    background-color: #EFF6FF;
-    color: #1D4ED8;
+    background-color: var(--surface-50);
+    color: var(--primary-600);
   }
   .p-tree.p-tree-horizontal .p-treenode .p-treenode-content.p-highlight .p-treenode-icon {
-    color: #1D4ED8;
+    color: var(--primary-600);
   }
   .p-tree.p-tree-horizontal .p-treenode .p-treenode-content .p-tree-toggler {
     margin-right: 0.5rem;
@@ -3755,8 +3801,8 @@ app-root > span > router-outlet + *{
     height: 1.143rem;
     min-width: 1.143rem;
     line-height: 1.143rem;
-    color: #1D4ED8;
-    background: #EFF6FF;
+    color: var(--primary-600);
+    background: var(--surface-50);
     margin-left: 0.5rem;
   }
   .p-treetable .p-sortable-column:not(.p-highlight):hover {
@@ -3767,11 +3813,11 @@ app-root > span > router-outlet + *{
     color: var(--surface-700);
   }
   .p-treetable .p-sortable-column.p-highlight {
-    background: #EFF6FF;
-    color: #1D4ED8;
+    background: var(--surface-50);
+    color: var(--primary-600);
   }
   .p-treetable .p-sortable-column.p-highlight .p-sortable-column-icon {
-    color: #1D4ED8;
+    color: var(--primary-600);
   }
   .p-treetable .p-treetable-tbody > tr {
     background: var(--surface-0);
@@ -3824,21 +3870,21 @@ app-root > span > router-outlet + *{
     background-color: var(--surface-50);
   }
   .p-treetable .p-treetable-tbody > tr > td p-treetablecheckbox .p-checkbox.p-variant-filled:not(.p-disabled) .p-checkbox-box.p-highlight:hover {
-    background: #1D4ED8;
+    background: var(--primary-600);
   }
   .p-treetable .p-treetable-tbody > tr:focus-visible {
     outline: 0.15rem solid var(--primary-50);
     outline-offset: -0.15rem;
   }
   .p-treetable .p-treetable-tbody > tr.p-highlight {
-    background: #EFF6FF;
-    color: #1D4ED8;
+    background: var(--surface-50);
+    color: var(--primary-600);
   }
   .p-treetable .p-treetable-tbody > tr.p-highlight .p-treetable-toggler {
-    color: #1D4ED8;
+    color: var(--primary-600);
   }
   .p-treetable .p-treetable-tbody > tr.p-highlight .p-treetable-toggler:hover {
-    color: #1D4ED8;
+    color: var(--primary-600);
   }
   .p-treetable.p-treetable-hoverable-rows .p-treetable-tbody > tr:not(.p-highlight):hover {
     background: var(--surface-50);
@@ -4362,8 +4408,8 @@ app-root > span > router-outlet + *{
     box-shadow: 0 0 0 0.2rem var(--primary-50);
   }
   .p-stepper .p-stepper-header.p-highlight .p-stepper-number {
-    background: #EFF6FF;
-    color: #1D4ED8;
+    background: var(--surface-50);
+    color: var(--primary-600);
   }
   .p-stepper .p-stepper-header.p-highlight .p-stepper-title {
     color: var(--surface-400);
@@ -4569,7 +4615,7 @@ app-root > span > router-outlet + *{
     right: -1rem;
   }
   .p-overlaypanel .p-overlaypanel-close:enabled:hover {
-    background: #2563eb;
+    background: var(--primary-400);
     color: var(--surface-0);
   }
   .p-overlaypanel:after {
@@ -4678,7 +4724,7 @@ app-root > span > router-outlet + *{
   .p-fileupload .p-fileupload-content.p-fileupload-highlight {
     border-color: 1px dashed var(--primary-500);
     border-style: dashed;
-    background-color: #EFF6FF;
+    background-color: var(--surface-50);
   }
   .p-fileupload .p-progressbar {
     height: 0.25rem;
@@ -4691,14 +4737,14 @@ app-root > span > router-outlet + *{
   }
 
   .p-fileupload-choose:not(.p-disabled):hover {
-    background: #2563eb;
+    background: var(--primary-400);
     color: var(--surface-0);
-    border-color: #2563eb;
+    border-color: var(--primary-400);
   }
   .p-fileupload-choose:not(.p-disabled):active {
-    background: #1D4ED8;
+    background: var(--primary-600);
     color: var(--surface-0);
-    border-color: #1D4ED8;
+    border-color: var(--primary-600);
   }
 
   .p-breadcrumb {
@@ -4773,15 +4819,15 @@ app-root > span > router-outlet + *{
     color: var(--surface-500);
   }
   .p-contextmenu .p-menuitem.p-highlight > .p-menuitem-content {
-    color: #1D4ED8;
-    background: #EFF6FF;
+    color: var(--primary-600);
+    background: var(--surface-50);
   }
   .p-contextmenu .p-menuitem.p-highlight > .p-menuitem-content .p-menuitem-link .p-menuitem-text {
-    color: #1D4ED8;
+    color: var(--primary-600);
   }
   .p-contextmenu .p-menuitem.p-highlight > .p-menuitem-content .p-menuitem-link .p-menuitem-icon,
 .p-contextmenu .p-menuitem.p-highlight > .p-menuitem-content .p-menuitem-link .p-submenu-icon {
-    color: #1D4ED8;
+    color: var(--primary-600);
   }
   .p-contextmenu .p-menuitem.p-highlight.p-focus > .p-menuitem-content {
     background: rgba(59, 130, 246, 0.24);
@@ -4843,13 +4889,13 @@ app-root > span > router-outlet + *{
     height: 4rem;
   }
   .p-dock.p-dock-top .p-dock-item-second-prev,
-.p-dock.p-dock-top .p-dock-item-second-next, .p-dock.p-dock-bottom .p-dock-item-second-prev,
-.p-dock.p-dock-bottom .p-dock-item-second-next {
+  .p-dock.p-dock-top .p-dock-item-second-next, .p-dock.p-dock-bottom .p-dock-item-second-prev,
+  .p-dock.p-dock-bottom .p-dock-item-second-next {
     margin: 0 0.9rem;
   }
   .p-dock.p-dock-top .p-dock-item-prev,
-.p-dock.p-dock-top .p-dock-item-next, .p-dock.p-dock-bottom .p-dock-item-prev,
-.p-dock.p-dock-bottom .p-dock-item-next {
+  .p-dock.p-dock-top .p-dock-item-next, .p-dock.p-dock-bottom .p-dock-item-prev,
+  .p-dock.p-dock-bottom .p-dock-item-next {
     margin: 0 1.3rem;
   }
   .p-dock.p-dock-top .p-dock-item-current, .p-dock.p-dock-bottom .p-dock-item-current {
@@ -4920,15 +4966,15 @@ app-root > span > router-outlet + *{
     color: var(--surface-500);
   }
   .p-megamenu .p-menuitem.p-highlight > .p-menuitem-content {
-    color: #1D4ED8;
-    background: #EFF6FF;
+    color: var(--primary-600);
+    background: var(--surface-50);
   }
   .p-megamenu .p-menuitem.p-highlight > .p-menuitem-content .p-menuitem-link .p-menuitem-text {
-    color: #1D4ED8;
+    color: var(--primary-600);
   }
   .p-megamenu .p-menuitem.p-highlight > .p-menuitem-content .p-menuitem-link .p-menuitem-icon,
 .p-megamenu .p-menuitem.p-highlight > .p-menuitem-content .p-menuitem-link .p-submenu-icon {
-    color: #1D4ED8;
+    color: var(--primary-600);
   }
   .p-megamenu .p-menuitem.p-highlight.p-focus > .p-menuitem-content {
     background: rgba(59, 130, 246, 0.24);
@@ -5021,7 +5067,7 @@ app-root > span > router-outlet + *{
     color: var(--surface-400);
     border: 1px solid #e5e7eb;
     border-radius: 6px;
-    width: 12.5rem;
+    /*width: 12.5rem;*/
   }
   .p-menu .p-menuitem > .p-menuitem-content {
     color: var(--surface-400);
@@ -5044,22 +5090,22 @@ app-root > span > router-outlet + *{
     color: var(--surface-500);
   }
   .p-menu .p-menuitem.p-highlight > .p-menuitem-content {
-    color: #1D4ED8;
-    background: #EFF6FF;
+    color: var(--primary-600);
+    background: var(--surface-50);
   }
   .p-menu .p-menuitem.p-highlight > .p-menuitem-content .p-menuitem-link .p-menuitem-text {
-    color: #1D4ED8;
+    color: var(--primary-600);
   }
   .p-menu .p-menuitem.p-highlight > .p-menuitem-content .p-menuitem-link .p-menuitem-icon,
 .p-menu .p-menuitem.p-highlight > .p-menuitem-content .p-menuitem-link .p-submenu-icon {
-    color: #1D4ED8;
+    color: var(--primary-600);
   }
   .p-menu .p-menuitem.p-highlight.p-focus > .p-menuitem-content {
     background: rgba(59, 130, 246, 0.24);
   }
   .p-menu .p-menuitem:not(.p-highlight):not(.p-disabled).p-focus > .p-menuitem-content {
-    color: var(--surface-400);
-    background: #e5e7eb;
+    color: var(--primary-700);
+    background: var(--primary-100);
   }
   .p-menu .p-menuitem:not(.p-highlight):not(.p-disabled).p-focus > .p-menuitem-content .p-menuitem-link .p-menuitem-text {
     color: var(--surface-400);
@@ -5069,15 +5115,15 @@ app-root > span > router-outlet + *{
     color: var(--surface-400);
   }
   .p-menu .p-menuitem:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover {
-    color: var(--surface-400);
-    background: var(--surface-50);
+    color: var(--primary-700);
+    background: var(--primary-100);
   }
   .p-menu .p-menuitem:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover .p-menuitem-link .p-menuitem-text {
-    color: var(--surface-400);
+    color: var(--primary-700);
   }
   .p-menu .p-menuitem:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover .p-menuitem-link .p-menuitem-icon,
 .p-menu .p-menuitem:not(.p-highlight):not(.p-disabled) > .p-menuitem-content:hover .p-menuitem-link .p-submenu-icon {
-    color: var(--surface-500);
+    color: var(--primary-500);
   }
   .p-menu.p-menu-overlay {
     background: var(--surface-0);
@@ -5173,22 +5219,22 @@ app-root > span > router-outlet + *{
     color: var(--surface-500);
   }
   .p-menubar .p-menuitem.p-highlight > .p-menuitem-content {
-    color: #1D4ED8;
-    background: #EFF6FF;
+    color: var(--primary-600);
+    background: var(--surface-50);
   }
   .p-menubar .p-menuitem.p-highlight > .p-menuitem-content .p-menuitem-link .p-menuitem-text {
-    color: #1D4ED8;
+    color: var(--primary-600);
   }
   .p-menubar .p-menuitem.p-highlight > .p-menuitem-content .p-menuitem-link .p-menuitem-icon,
 .p-menubar .p-menuitem.p-highlight > .p-menuitem-content .p-menuitem-link .p-submenu-icon {
-    color: #1D4ED8;
+    color: var(--primary-600);
   }
   .p-menubar .p-menuitem.p-highlight.p-focus > .p-menuitem-content {
     background: rgba(59, 130, 246, 0.24);
   }
   .p-menubar .p-menuitem:not(.p-highlight):not(.p-disabled).p-focus > .p-menuitem-content {
     color: var(--surface-400);
-    background: #e5e7eb;
+    background: var(--primary-400);
   }
   .p-menubar .p-menuitem:not(.p-highlight):not(.p-disabled).p-focus > .p-menuitem-content .p-menuitem-link .p-menuitem-text {
     color: var(--surface-400);
@@ -5391,15 +5437,15 @@ app-root > span > router-outlet + *{
     color: var(--surface-500);
   }
   .p-panelmenu .p-panelmenu-content .p-menuitem.p-highlight > .p-menuitem-content {
-    color: #1D4ED8;
-    background: #EFF6FF;
+    color: var(--primary-600);
+    background: var(--surface-50);
   }
   .p-panelmenu .p-panelmenu-content .p-menuitem.p-highlight > .p-menuitem-content .p-menuitem-link .p-menuitem-text {
-    color: #1D4ED8;
+    color: var(--primary-600);
   }
   .p-panelmenu .p-panelmenu-content .p-menuitem.p-highlight > .p-menuitem-content .p-menuitem-link .p-menuitem-icon,
 .p-panelmenu .p-panelmenu-content .p-menuitem.p-highlight > .p-menuitem-content .p-menuitem-link .p-submenu-icon {
-    color: #1D4ED8;
+    color: var(--primary-600);
   }
   .p-panelmenu .p-panelmenu-content .p-menuitem.p-highlight.p-focus > .p-menuitem-content {
     background: rgba(59, 130, 246, 0.24);
@@ -5475,15 +5521,15 @@ app-root > span > router-outlet + *{
     color: var(--surface-500);
   }
   .p-slidemenu .p-menuitem.p-highlight > .p-menuitem-content {
-    color: #1D4ED8;
-    background: #EFF6FF;
+    color: var(--primary-600);
+    background: var(--surface-50);
   }
   .p-slidemenu .p-menuitem.p-highlight > .p-menuitem-content .p-menuitem-link .p-menuitem-text {
-    color: #1D4ED8;
+    color: var(--primary-600);
   }
   .p-slidemenu .p-menuitem.p-highlight > .p-menuitem-content .p-menuitem-link .p-menuitem-icon,
 .p-slidemenu .p-menuitem.p-highlight > .p-menuitem-content .p-menuitem-link .p-submenu-icon {
-    color: #1D4ED8;
+    color: var(--primary-600);
   }
   .p-slidemenu .p-menuitem.p-highlight.p-focus > .p-menuitem-content {
     background: rgba(59, 130, 246, 0.24);
@@ -5582,8 +5628,8 @@ app-root > span > router-outlet + *{
     box-shadow: 0 0 0 0.2rem var(--primary-50);
   }
   .p-steps .p-steps-item.p-highlight .p-steps-number {
-    background: #EFF6FF;
-    color: #1D4ED8;
+    background: var(--surface-50);
+    color: var(--primary-600);
   }
   .p-steps .p-steps-item.p-highlight .p-steps-title {
     font-weight: 700;
@@ -5715,15 +5761,15 @@ app-root > span > router-outlet + *{
     color: var(--surface-500);
   }
   .p-tieredmenu .p-menuitem.p-highlight > .p-menuitem-content {
-    color: #1D4ED8;
-    background: #EFF6FF;
+    color: var(--primary-600);
+    background: var(--surface-50);
   }
   .p-tieredmenu .p-menuitem.p-highlight > .p-menuitem-content .p-menuitem-link .p-menuitem-text {
-    color: #1D4ED8;
+    color: var(--primary-600);
   }
   .p-tieredmenu .p-menuitem.p-highlight > .p-menuitem-content .p-menuitem-link .p-menuitem-icon,
 .p-tieredmenu .p-menuitem.p-highlight > .p-menuitem-content .p-menuitem-link .p-submenu-icon {
-    color: #1D4ED8;
+    color: var(--primary-600);
   }
   .p-tieredmenu .p-menuitem.p-highlight.p-focus > .p-menuitem-content {
     background: rgba(59, 130, 246, 0.24);
@@ -5804,7 +5850,7 @@ app-root > span > router-outlet + *{
     color: #ff5757;
   }
   .p-inline-message .p-inline-message-icon {
-    font-size: 1rem;
+    font-size: var(--font-size);
     margin-right: 0.5rem;
   }
   .p-inline-message .p-icon {
@@ -5812,7 +5858,7 @@ app-root > span > router-outlet + *{
     height: 1rem;
   }
   .p-inline-message .p-inline-message-text {
-    font-size: 1rem;
+    font-size: var(--font-size);
   }
   .p-inline-message.p-inline-message-icon-only .p-inline-message-icon {
     margin-right: 0;
@@ -5889,7 +5935,7 @@ app-root > span > router-outlet + *{
     color: #ff5757;
   }
   .p-message .p-message-text {
-    font-size: 1rem;
+    font-size: var(--font-size);
     font-weight: 500;
   }
   .p-message .p-message-icon {
@@ -6095,8 +6141,8 @@ app-root > span > router-outlet + *{
     background: #9ca3af;
   }
   .p-galleria .p-galleria-indicators .p-galleria-indicator.p-highlight button {
-    background: #EFF6FF;
-    color: #1D4ED8;
+    background: var(--surface-50);
+    color: var(--primary-600);
   }
   .p-galleria.p-galleria-indicators-bottom .p-galleria-indicator, .p-galleria.p-galleria-indicators-top .p-galleria-indicator {
     margin-right: 0.5rem;
@@ -6114,8 +6160,8 @@ app-root > span > router-outlet + *{
     background: rgba(255, 255, 255, 0.6);
   }
   .p-galleria.p-galleria-indicator-onitem .p-galleria-indicators .p-galleria-indicator.p-highlight button {
-    background: #EFF6FF;
-    color: #1D4ED8;
+    background: var(--surface-50);
+    color: var(--primary-600);
   }
   .p-galleria .p-galleria-thumbnail-container {
     background: rgba(0, 0, 0, 0.9);
@@ -6502,7 +6548,7 @@ app-root > span > router-outlet + *{
   }
   .p-terminal .p-terminal-input {
     font-family: var(--font-family);
-    font-size: 1rem;
+    font-size: var(--font-size);
   }
 }
 @layer primeng {
@@ -6536,7 +6582,7 @@ app-root > span > router-outlet + *{
   }
 
   .p-button:focus {
-    box-shadow: 0 0 0 2px var(--surface-0), 0 0 0 4px #9dc1fb, 0 1px 2px 0 black;
+    box-shadow: 0 0 0 2px var(--surface-0), 0 0 0 4px var(--primary-200), 0 1px 2px 0 black;
   }
   .p-button.p-button-secondary:enabled:focus {
     box-shadow: 0 0 0 2px var(--surface-0), 0 0 0 4px #b0b9c6, 0 1px 2px 0 black;
@@ -6565,7 +6611,7 @@ app-root > span > router-outlet + *{
   }
 
   .p-speeddial-item.p-focus > .p-speeddial-action {
-    box-shadow: 0 0 0 2px var(--surface-0), 0 0 0 4px #9dc1fb, 0 1px 2px 0 black;
+    box-shadow: 0 0 0 2px var(--surface-0), 0 0 0 4px var(--primary-200), 0 1px 2px 0 black;
   }
 
   .p-toast-message {

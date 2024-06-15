@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-panel',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrl: './panel.component.scss'
 })
 export class PanelComponent {
+  items: MenuItem[] | undefined;
 
+  constructor() {
+    
+    this.items = [
+      { label: 'New', icon: 'pi pi-plus' },
+      { label: 'Search', icon: 'pi pi-search' }
+    ];
+  }
 }
