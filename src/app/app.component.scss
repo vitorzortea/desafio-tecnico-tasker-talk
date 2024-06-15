@@ -1,0 +1,10 @@
+:host>span{
+    /*
+        Impedir que o primeiro elemento dos componentes
+        filhos com margin-top mude o body de lugar
+        E tbm poder criar uma seleção direta com os filhos diretos
+        do app-root sem precissar por classe em todos eles
+    */
+    display: table;
+    width: 100%;
+}
