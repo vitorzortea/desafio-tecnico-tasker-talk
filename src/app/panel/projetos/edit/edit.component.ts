@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CrudService } from '../../../core/services/crud.service';
 import Swal from 'sweetalert2';
+import { environment } from '../../../../environments/environment';
 
 type FormProjeto = {
   describe: string;
@@ -17,19 +18,18 @@ type FormProjeto = {
   editedAt: Date,
   id: string,
   userId: string,
-  listTask: FormlistTask[],
 }
-type FormlistTask = {
-  createdAt: Date,
-  endAt: Date,
-  title: string,
-  description: string,
-  status: number,
-  porcent: string,
-  id: string,
-  projectId: string,
-  subTasks: any[],
-}
+//type FormlistTask = {
+//  createdAt: Date,
+//  endAt: Date,
+//  title: string,
+//  description: string,
+//  status: number,
+//  porcent: string,
+//  id: string,
+//  projectId: string,
+//  subTasks: any[],
+//}
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
@@ -48,6 +48,7 @@ export class EditComponent {
     private fb: FormBuilder
   ){ 
     this.form = this.fb.group({
+      id: [{value:null, disabled:true}],
       status:  [null, Validators.required],
       empresa:  ['', Validators.required],
       title:  ['', Validators.required],
@@ -56,22 +57,11 @@ export class EditComponent {
       describe: ['', Validators.required],
       imagem: ['', Validators.required],
       porcent: [0, Validators.required],
-      user: this.fb.group({}),
+      user: [null, Validators.required],
       editedAt: [new Date(), Validators.required],
-      id: [null, Validators.required],
-      userId: [null, Validators.required],
-      listTask: this.fb.array([{
-            createdAt: [new Date(), Validators.required],
-            endAt: [new Date(), Validators.required],
-            title: ['', Validators.required],
-            description: ['', Validators.required],
-            status: [null, Validators.required],
-            porcent: ['', Validators.required],
-            id: ['', Validators.required],
-            projectId: ['', Validators.required],
-            subTasks: this.fb.array([]),
-      }]),
-    });    
+      userId: [undefined, Validators.required],
+    });
+    console.log('Teste: ', this.form.value)
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     if(this.id!='novo'){
       this.title = 'Editar Projeto'
@@ -92,23 +82,30 @@ export class EditComponent {
       describe: [e.describe , Validators.required],
       imagem: [e.imagem , Validators.required],
       porcent: [e.porcent, Validators.required],
-      user: this.fb.group(e.user),
+      user: [e.user, Validators.required],
       editedAt: [new Date(e.editedAt ), Validators.required],
       id: [e.id, Validators.required],
       userId: [e.userId, Validators.required],
-      listTask: this.fb.array([...e.listTask]),
     });
   }  
 
   submit(){
+    if(!this.form.value.userId){
+      this.form.patchValue({
+        user: {
+          name: environment.user?.name || 'User Erro',
+          avatar: environment.user?.avatar || 'User Erro'
+        },
+        userId: environment.user?.id || '-1',
+        imagem: "https://loremflickr.com/640/480/business"
+      });
+    }
     this.form.markAllAsTouched();
-    console.log('entrou', )
     if(this.form.valid){
-      const value = this.form.value as FormProjeto;
-      const user = (value.userId) ? `users/${value.userId}/` : ''
+      const value = this.form.value;
       const save = (value.id) 
-        ? this.crud.put(user+'project', value.id, value)
-        : this.crud.post(user+'project', value.id);
+        ? this.crud.put(`users/${value.userId}/project`, value.id, value)
+        : this.crud.post(`users/${value.userId}/project`, value);
       save.subscribe({
         next:(e)=>{
           this.loadForm(e as FormProjeto);
