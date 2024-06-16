@@ -17,32 +17,67 @@
             </div>
         </p-toolbar>
     </p-card>
-    <p-card class="col-6" *ngFor="let item of [1,1,1,1,1,1,1,1,1]">
+    <ng-container *ngIf="loading">
+        <p-card class="col-6" *ngFor="let asdas of [].constructor(4)">
+            <p-panel [toggleable]="true" [collapsed]="true">
+                <ng-template pTemplate="header">
+                    <div class="flex align-items-center gap-2">
+                        <p-skeleton size="4rem" />
+                        <div class="flex flex-column gap-2">
+                            <p-skeleton width="8rem" height=".8em" />
+                            <p-skeleton width="12rem" height="1.5em" />
+                            <p-skeleton width="8rem" height=".6em" />
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="icons">
+                    <p-skeleton  class="p-panel-header-icon p-link mr-2" shape="circle" size="2rem" />
+                    <p-skeleton  class="p-panel-header-icon p-link mr-2" shape="circle" size="2rem" />
+                </ng-template>
+            </p-panel>
+            <div class="flex flex-wrap align-items-center justify-content-between gap-3 px-3 pb-3 pt-1">
+                <div class="flex align-items-center gap-2">
+                    <div class="responsavel">
+                        <p-skeleton size="3rem" />
+                    </div>
+                </div>
+                
+                <p-skeleton class="flex-auto" height="1.2em" />
+                <p-progressBar class="flex-auto" [value]="0" [style]="{ height: '1.2em' }" />
+                <div>
+                    <p-skeleton width="100px" />
+                </div>
+            </div>
+        </p-card>
+    </ng-container>
+    
+    <ng-container *ngIf="!loading">
+    <p-card class="col-6" *ngFor="let projeto of projetos">
         <p-panel [toggleable]="true" [collapsed]="true">
             <ng-template pTemplate="header">
                 <div class="flex align-items-center gap-2">
                     <p-avatar 
-                        image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" 
+                        [image]="projeto.imagem" 
                         size="xlarge"
                         [style]="{overflow:'hidden', borderRadius:'6px'}" 
                     />
                                             
                     <div class="flex flex-column gap-2">
-                        <span class="font-bold">Nome da Empresa</span>
-                        <span class="text-xl font-bold line-height-1">Nome do Projeto</span>
-                        <span class="text-xs line-height-1">20/11/1992 - 16/06/2024</span>
+                        <span class="font-bold">{{projeto.empresa}}</span>
+                        <span class="text-xl font-bold line-height-1">{{projeto.title}}</span>
+                        <span class="text-xs line-height-1">{{projeto.createdAt}} - {{projeto.endAt}}</span>
                     </div>
                 </div>
             </ng-template>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.</p>
+            <p>{{projeto.status}} - colocar no obj</p>
             <p-divider />
             <a routerLink="/" class="flex align-items-center no-underline text-color">
-                <p-knob class="mr-2" [min]="30" [size]="30" [strokeWidth]="15" [disabled]="true" [readonly]="true" />
+                <p-knob class="mr-2" [min]="projeto.porcent" [size]="30" [strokeWidth]="15" [disabled]="true" [readonly]="true" />
                 <span>Nome da tarefa</span>
             </a>
             <p-divider />
             <a routerLink="/" class="flex align-items-center no-underline text-color">
-                <p-knob class="mr-2" [min]="30" [size]="30" [strokeWidth]="15" [disabled]="true" [readonly]="true" />
+                <p-knob class="mr-2" [min]="projeto.porcent" [size]="30" [strokeWidth]="15" [disabled]="true" [readonly]="true" />
                 <span>Nome da tarefa</span>
             </a>
             <ng-template pTemplate="icons">
@@ -71,17 +106,33 @@
             <div class="flex align-items-center gap-2">
                 <div class="responsavel">
                     <p-avatar 
-                    image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" 
+                    [image]="projeto.user.avatar" 
                     size="large"
                     shape="circle"
                     />
                     <span>Responsável</span>
                 </div>
             </div>
-            <p-progressBar class="flex-auto" [value]="50" [style]="{ height: '1.2em' }" />
+            <p-progressBar class="flex-auto" [value]="projeto.porcent" max="100" [style]="{ height: '1.2em' }" />
             <div>
                 <small>Alterado:</small> <span class="font-bold"> 16/06/2024</span>
             </div>
         </div>
     </p-card>
+    <p-card class="col-12">
+        <div class="flex align-items-center justify-content-end">
+                <p-paginator
+                    (onPageChange)="onPageChange($event)"
+                    [first]="this.paginator.first"
+                    [rows]="this.paginator.rows"
+                    [rowsPerPageOptions]="[4, 10, 20, 30]"
+                    [totalRecords]="total"
+                    [showPageLinks]="false"
+                    [showCurrentPageReport]="true"
+                    [currentPageReportTemplate]="(this.paginator.first+1)+'-'+((this.paginator.first)+(projetos?.length || 0))+' de {totalRecords}'" 
+                >
+                </p-paginator>
+        </div>
+    </p-card>
+    </ng-container>
 </div>

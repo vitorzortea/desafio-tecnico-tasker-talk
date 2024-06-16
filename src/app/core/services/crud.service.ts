@@ -19,7 +19,7 @@ export class CrudService<T> implements OnDestroy {
   get(table:string, params?:{[key:string]:any}){
     const httpParams = new HttpParams({ fromObject: params });
     const _httpOption = {...this.httpOption, params: httpParams};
-    return this.http.get<T[]>(`${this.api}${table}`, _httpOption).pipe(takeUntil(this.destroy$));
+    return this.http.get<T[]|T>(`${this.api}${table}`, _httpOption).pipe(takeUntil(this.destroy$));
   }
   getID(table:string, id:string, params?:{[key:string]:any}){
     const httpParams = new HttpParams({ fromObject: params });

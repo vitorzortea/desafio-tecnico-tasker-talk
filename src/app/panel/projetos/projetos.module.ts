@@ -14,6 +14,8 @@ import { DividerModule } from 'primeng/divider';
 import { FieldsetModule } from 'primeng/fieldset';
 import { ToolbarModule } from 'primeng/toolbar';
 import { KnobModule } from 'primeng/knob';
+import { SkeletonModule } from 'primeng/skeleton';
+import { PaginatorModule } from 'primeng/paginator';
 
 
 
@@ -35,6 +37,8 @@ import { KnobModule } from 'primeng/knob';
     FieldsetModule,
     ToolbarModule,
     KnobModule,
+    SkeletonModule,
+    PaginatorModule,
   ]
 })
 export class ProjetosModule { }

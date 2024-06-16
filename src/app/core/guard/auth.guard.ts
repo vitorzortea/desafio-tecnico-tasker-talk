@@ -42,7 +42,7 @@ export const authGuard: CanActivateFn = (route, state) => {
 const isTokenValid = (crud: CrudService<Session>, token: string): Observable<Session | null> => {
   return crud.get('sessions').pipe(
     map(sessions => {
-      const session = sessions.find(s => s.token === token);
+      const session = (sessions as Session[]).find(s => s.token === token);
       return session || null;
     }),
     catchError(() => of(null))

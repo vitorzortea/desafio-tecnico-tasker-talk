@@ -34,7 +34,7 @@ export class AuthService{
       return this.crud.get('users', {email}).pipe(
         map((users)=>{        
   
-          const user:User = users[0] as User;
+          const user:User = (users as User[])[0] as User;
           if(user.password !== password){
             Swal.fire({ icon:'error', text:'E-mail ou senha incorreto', timer:20000, });
             return false;
@@ -43,9 +43,7 @@ export class AuthService{
           let token = Math.random().toString(36).substr(2);
           return this.crud.post(`users/${user.id}/sessions`,{token}).pipe(
             map(session=>{
-              console.log('entrou:', token);
               this.storage.setItem('JWT_Fake', token);
-              console.log('entrou1:', this.storage.getItem('JWT_Fake'));
               environment.token = token;
               this.router.navigateByUrl('');
               return true;
@@ -80,7 +78,7 @@ export class AuthService{
       this.crud.get(`sessions`, {token}).subscribe({
         next:(res)=>{
           //O filtro do mockapi.io não exato;
-          const session = res.find(e=>(e as Session).token===token) as Session | undefined;
+          const session = (res as Session[]).find(e=>(e as Session).token===token) as Session | undefined;
           if(session?.id){
             this.crud.delete(`users/${session.UserId}/sessions`, session.id).subscribe({
               error:(err)=>{console.log(err)}

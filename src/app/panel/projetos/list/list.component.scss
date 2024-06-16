@@ -23,6 +23,21 @@
             margin: .6rem 0;
         }
         
+        p-skeleton + .p-ripple{
+            display: none;
+        }
+    }
+    p-paginator .p-paginator.p-component{
+        padding: 0;
+        &>*:not(p-dropdown):not(:nth-child(4)):not(:nth-child(5)){ order: 1; }
+        &>*:nth-child(4){ order: 3; }
+        &>*:nth-child(5){ order: 3; }
+        p-dropdown{
+            order: 2;
+            .p-dropdown{
+                height: auto;
+            }
+        }
     }
 }
 .responsavel{
@@ -31,6 +46,7 @@
     align-items: center;
     &>span{
         margin-top: -15px;
+        margin-bottom: -7px;
         background-color: var(--surface-0);
         padding:0px;
         font-size: 10px;
