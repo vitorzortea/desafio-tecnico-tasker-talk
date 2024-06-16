@@ -18,6 +18,7 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { PaginatorModule } from 'primeng/paginator';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { TagModule } from 'primeng/tag';
+import { SidebarModule } from 'primeng/sidebar'
 
 
 
@@ -44,6 +45,7 @@ import { TagModule } from 'primeng/tag';
     PaginatorModule,
     ToggleButtonModule,
     TagModule,
+    SidebarModule,
   ]
 })
 export class ProjetosModule { }

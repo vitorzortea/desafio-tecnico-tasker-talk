@@ -4,8 +4,14 @@ import { ListComponent } from './list/list.component';
 import { EditComponent } from './edit/edit.component';
 
 const routes: Routes = [
-  {path:'', component:ListComponent},
-  {path:'novo', component:EditComponent},
+  {
+    path:'',
+    component:ListComponent,
+    children:[
+      {path:':id', component:EditComponent},
+      {path:'novo', component:EditComponent},
+    ]
+  },
 ];
 
 @NgModule({

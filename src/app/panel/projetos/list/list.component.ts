@@ -6,6 +6,8 @@ import { PaginatorState } from 'primeng/paginator';
 import { PanelAfterToggleEvent } from 'primeng/panel';
 import { Task, TasktList } from '../../../core/model/Task';
 import { environment } from '../../../../environments/environment';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
 
 @Component({
   selector: 'app-list',
@@ -13,18 +15,44 @@ import { environment } from '../../../../environments/environment';
   styleUrl: './list.component.scss'
 })
 export class ListComponent {
+  projetos:Project[]|undefined;
+  status:string|undefined;
   loading=true;
   isMe = false;
-  status:string|undefined;
-  projetos:Project[]|undefined;
+  isEdit = {visible:false, id:'-1'};
+  menuProjeto:MenuItem[] = [
+    {
+        label: 'Editar Projeto',
+        icon: 'pi pi-pen-to-square',
+        id:'edit'
+    },
+    {
+        label: 'Adicionar Tarefa',
+        icon: 'pi pi-list-check'
+    },
+    {
+        separator: true
+    },
+    {
+        label: 'Deletar',
+        icon: 'pi pi-times'
+  }]
+
+
   total:number = 0;
   paginator:Paginator = {first: 0, rows: 6, page:0, pageCount:0};
   filter:{[key:string]:any}={};
 
   constructor(
+    private router:Router,
+    private activatedRoute:ActivatedRoute,
     private crud:CrudService<Project | ProjectList | TasktList>,
   ){
     this.loadLit();
+    const idAtivo = router.url.split('/')
+    if(idAtivo[idAtivo.length-1] != 'projetos'){
+      this.isEdit={visible:true, id:router.url.split('/')[router.url.split('/').length-1]}
+    }
   }
   loadLit(){
     this.projetos=[];
@@ -82,6 +110,16 @@ export class ListComponent {
     this.filter['status'] = this.status;
     this.loadLit();
   }
+
+  
+  hubMenu(id:string, goTo:'edit'){
+    ({
+      edit:()=>{this.isEdit={visible:true, id}}
+    }[goTo])();
+    //this[goTo](id);
+  }
+  onShow(){ this.router.navigate([this.isEdit.id], {relativeTo: this.activatedRoute}); }
+  onHide(){ this.router.navigate(['./'], {relativeTo: this.activatedRoute}); }
   onPageChange(event: PaginatorState) {
     this.paginator = event as Paginator;
     this.loadLit();
