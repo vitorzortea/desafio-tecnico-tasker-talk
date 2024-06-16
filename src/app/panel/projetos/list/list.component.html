@@ -52,8 +52,8 @@
     </ng-container>
     
     <ng-container *ngIf="!loading">
-    <p-card class="col-6" *ngFor="let projeto of projetos">
-        <p-panel [toggleable]="true" [collapsed]="true">
+    <p-card *ngFor="let projeto of projetos; let i = index" class="col-6" >
+        <p-panel [toggleable]="true" [collapsed]="true" (onAfterToggle)="loadTask($event, i)">
             <ng-template pTemplate="header">
                 <div class="flex align-items-center gap-2">
                     <p-avatar 
@@ -71,15 +71,21 @@
             </ng-template>
             <p>{{projeto.status}} - colocar no obj</p>
             <p-divider />
-            <a routerLink="/" class="flex align-items-center no-underline text-color">
-                <p-knob class="mr-2" [min]="projeto.porcent" [size]="30" [strokeWidth]="15" [disabled]="true" [readonly]="true" />
-                <span>Nome da tarefa</span>
-            </a>
-            <p-divider />
-            <a routerLink="/" class="flex align-items-center no-underline text-color">
-                <p-knob class="mr-2" [min]="projeto.porcent" [size]="30" [strokeWidth]="15" [disabled]="true" [readonly]="true" />
-                <span>Nome da tarefa</span>
-            </a>
+            <ng-container *ngIf="projeto.listTask?.length">
+                <ng-container *ngFor="let task of projeto.listTask">
+                    <a routerLink="/" class="flex align-items-center no-underline text-color">
+                        <p-knob class="mr-2" [(ngModel)]="task.porcent" [size]="30" [strokeWidth]="15" [disabled]="true" [readonly]="true" />
+                        <span>{{task.title}}</span>
+                    </a>
+                </ng-container>
+            </ng-container>
+            <ng-container *ngIf="!projeto.listTask">
+                    <div class="flex align-items-center no-underline text-color">
+                        <p-skeleton class="mr-2" width="30px" height="30px" />
+                        <p-skeleton width="8rem" height="1em" />
+                    </div>
+            </ng-container>
+            
             <ng-template pTemplate="icons">
                 <button class="p-panel-header-icon p-link mr-2" (click)="menu.toggle($event)">
                     <span class="pi pi-cog"></span>

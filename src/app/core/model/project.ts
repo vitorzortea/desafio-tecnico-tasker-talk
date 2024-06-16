@@ -8,7 +8,7 @@ export type Project = {
     status: number,
     userId: string,
     user:{namw:string, avatar:string}
-    porcent: string,
+    porcent: number,
     editedAt: string,
     listTask?: any[],
 }

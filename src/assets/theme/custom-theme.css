@@ -3399,7 +3399,7 @@ app-root > span > router-outlet + *{
   }
 
   .p-paginator:not(button) {
-    background: var(--surface-0);
+    background: transparent;
     color: var(--surface-500);
     border: solid var(--surface-50);
     border-width: 0;
@@ -3414,7 +3414,7 @@ app-root > span > router-outlet + *{
     margin: 0.143rem;
 
     color: var(--surface-500);
-    background: color-mix(in srgb, var(--surface-0), transparent 70%);
+    background: color-mix(in srgb, var(--surface-0), transparent 20%);
     padding: 0.6rem 0.6rem;
     border: 1px solid  transparent;
     border-radius: var(--border-radius);
@@ -3425,7 +3425,9 @@ app-root > span > router-outlet + *{
       -2px -2px 3px var(--surface-0),
       inset 0 0 0 0px transparent;
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+
   }
+  .p-link:disabled{ filter: brightness(0.8); opacity: 0.4;}
   .p-paginator .p-paginator-first:not(.p-disabled):not(.p-highlight):hover,
   .p-paginator .p-paginator-prev:not(.p-disabled):not(.p-highlight):hover,
   .p-paginator .p-paginator-next:not(.p-disabled):not(.p-highlight):hover,
@@ -4052,9 +4054,13 @@ app-root > span > router-outlet + *{
   }
 
   .p-card {
-    background: var(--surface-0);
+    background: 
+    color-mix(in srgb, var(--surface-0), transparent 50%);
     color: var(--surface-400);
-    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: inset 0px 0px 0px var(--surface-200), inset 0px 0px 0px var(--surface-0), 2px 2px 4px 
+      color-mix(in srgb, var(--surface-100), var(--surface-200) 20%), -2px -2px 3px var(--surface-0), 0 0 0 0px 
+      color-mix(in srgb, var(--surface-500), transparent 70%), inset 0 0 0 0px 
+      color-mix(in srgb, var(--primary-500), transparent 70%);
     border-radius: 6px;
   }
   .p-card .p-card-body {
@@ -4145,7 +4151,7 @@ app-root > span > router-outlet + *{
   .p-panel .p-panel-header {
     border: 1px solid #e5e7eb;
     padding: 1.25rem;
-    background: #f9fafb;
+    background: transparent;
     color: var(--surface-700);
     border-top-right-radius: 6px;
     border-top-left-radius: 6px;
