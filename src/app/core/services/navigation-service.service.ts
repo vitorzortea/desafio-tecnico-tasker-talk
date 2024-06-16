@@ -7,10 +7,13 @@ import { Subject } from 'rxjs';
 export class NavigationService {
   private confirmNavigationSubject = new Subject<void>();
   confirmNavigation$ = this.confirmNavigationSubject.asObservable();
+  private negNavigationSubject = new Subject<void>();
+  negNavigation$ = this.negNavigationSubject.asObservable();
 
   confirmNavigation() {
-    
-    console.log('entrou aqui2');
     this.confirmNavigationSubject.next();
+  }
+  negNavigation() {
+    this.negNavigationSubject.next();
   }
 }

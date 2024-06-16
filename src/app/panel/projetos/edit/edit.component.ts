@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CrudService } from '../../../core/services/crud.service';
 import Swal from 'sweetalert2';
 import { environment } from '../../../../environments/environment';
+import { Subscription } from 'rxjs';
+import { NavigationService } from '../../../core/services/navigation-service.service';
 
 type FormProjeto = {
   describe: string;
@@ -36,6 +38,8 @@ type FormProjeto = {
   styleUrl: './edit.component.scss'
 })
 export class EditComponent {
+  private subscription: Subscription;
+  open= true;
   form: FormGroup;
 
   id:string|null;
@@ -45,7 +49,9 @@ export class EditComponent {
   constructor(
     private crud:CrudService<any>,
     private activatedRoute:ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router:Router,
+    private navigationService:NavigationService,
   ){ 
     this.form = this.fb.group({
       id: [{value:null, disabled:true}],
@@ -67,12 +73,14 @@ export class EditComponent {
       this.title = 'Editar Projeto'
       this.getProjecct();
     }
+    this.subscription = this.navigationService.confirmNavigation$.subscribe(()=>{ this.open = true; });
   }
   
   getProjecct(){
     this.crud.getID('project', this.id || '').subscribe(e=>this.loadForm(e as FormProjeto));
   }
   loadForm(e:FormProjeto){
+    console.log({...e})
     this.form = this.fb.group({
       status:  [e.status, Validators.required],
       empresa:  [e.empresa, Validators.required],
@@ -90,6 +98,7 @@ export class EditComponent {
   }  
 
   submit(){
+    console.log('salvar', this.form);
     if(!this.form.value.userId){
       this.form.patchValue({
         user: {
@@ -112,6 +121,8 @@ export class EditComponent {
           Swal.fire({
             icon:'success',
             text:'Projeto Salvo com sucesso'
+          }).then(()=>{
+            this.router.navigate(['../'], {relativeTo: this.activatedRoute});
           })
         },
         error:()=>{
@@ -122,5 +133,8 @@ export class EditComponent {
         }
       })
     }
+  }
+  onHide(){ 
+    this.router.navigate(['../'], {relativeTo: this.activatedRoute});
   }
 }

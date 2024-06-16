@@ -6,6 +6,7 @@ export type Project = {
     createdAt: string,
     endAt: string,
     status: number,
+    describe: string,
     userId: string,
     user:{namw:string, avatar:string}
     porcent: number,

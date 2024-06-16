@@ -18,12 +18,10 @@ import Swal from 'sweetalert2';
   styleUrl: './list.component.scss'
 })
 export class ListComponent {
-  private subscription: Subscription;
   projetos:Project[]|undefined;
   status:string|undefined;
   loading=true;
   isMe = false;
-  isEdit = {visible:false, id:'-1'};
   menuProjeto:MenuItem[] = [
     {
         label: 'Editar Projeto',
@@ -54,11 +52,9 @@ export class ListComponent {
     private navigationService: NavigationService,
     private crud:CrudService<Project | ProjectList | TasktList>,
   ){
-    this.subscription = this.navigationService.confirmNavigation$.subscribe(() => { this.isEdit.visible = true; });
     this.loadLit();
     const idAtivo = router.url.split('/')
     if(idAtivo[idAtivo.length-1] != 'projetos'){
-      this.isEdit={visible:true, id:router.url.split('/')[router.url.split('/').length-1]}
     }
   }
 
@@ -74,13 +70,7 @@ export class ListComponent {
       const _e = e as ProjectList;
       this.loading=false;
       this.total = _e.count;
-      this.projetos = _e.items/*.map(f=>{
-        //Uso Temporario Pois o MokApi não limita numeros Randomicos
-        if(f.status>=4){
-          f.status=0;
-          this.crud.put('project', (f.id as string), f).subscribe();
-        } return f});
-        */
+      this.projetos = _e.items;
       },
       error:(err)=>{
         this.loading=false;
@@ -124,19 +114,14 @@ export class ListComponent {
   }
 
   
-  hubMenu(id:string, goTo:'edit'|'delete'){
+  hubMenu(projeto:Project, goTo:'edit'|'delete'){
     ({
-      edit:()=>{this.isEdit={visible:true, id}},
-      delete:()=>{this.delete(id)},
+      edit:()=>{this.router.navigate([projeto.id], {relativeTo: this.activatedRoute}); },
+      delete:()=>{this.delete(projeto)},
     }[goTo])();
-    //this[goTo](id);
   }
-  onShow(toogle?:boolean){ if(!toogle){this.router.navigate([this.isEdit.id], {relativeTo: this.activatedRoute});} }
-  onHide(){
-    this.router.navigate(['./'], {relativeTo: this.activatedRoute});
-    this.loadLit();
-  }
-  delete(i:string){
+  goToCreate(){ this.router.navigate(['novo'], {relativeTo: this.activatedRoute}) }
+  delete(projeto:Project){
     Swal.fire({
       title: 'Você tem certeza?',
       text: 'Seu Projeto não poderá ser recuperado',
@@ -146,14 +131,17 @@ export class ListComponent {
       cancelButtonText: 'Não'
     }).then((e)=>{
       if(e.isConfirmed){
-        const user = (this.projetos as Project[])[Number(i)-1].userId;
-        this.crud.delete('users/'+user+'/'+'project', i).subscribe({
+        const user = projeto.userId;
+        const id = projeto.id || '';
+        console.log('pro:', projeto)
+        this.crud.delete('users/'+user+'/'+'project', id).subscribe({
           next:()=>{
             Swal.fire({
               icon:'success',
               text:'Projeto Deletado com sucesso',
               timer: 2000
-            })
+            });
+            this.resetPaginator();
             this.loadLit();
           },
           error:()=>{
@@ -161,8 +149,7 @@ export class ListComponent {
               icon:'error',
               text:'Algo Deu Errado',
               timer: 2000
-            })
-            this.loadLit();
+            });
           }
         })
 
@@ -176,5 +163,8 @@ export class ListComponent {
   onPageChange(event: PaginatorState) {
     this.paginator = event as Paginator;
     this.loadLit();
+  }
+  resetPaginator(){
+    this.paginator = {first: 0, rows: 6, page:0, pageCount:0};
   }
 }

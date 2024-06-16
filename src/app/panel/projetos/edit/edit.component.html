@@ -1,57 +1,59 @@
-<div class="px-3 py-4">
-    <h2>{{title}}</h2>
-    <p-divider></p-divider>
-    <form class="grid" [formGroup]="form">
-        
-        <div class="p-1 col-4">
-            <p-dropdown
-            formControlName="status"
-            [options]="[
-                {name:'Pendente', value:0},
-                {name:'Em Progresso', value:1},
-                {name:'Concluído', value:2}
-            ]"
-            [showClear]="true"
-            optionLabel="name" 
-            optionValue="value" 
-            placeholder="Status" />
-        </div>
-        <div class="p-1 col-8">
-            <input formControlName="empresa" class="text" placeholder="Empresa responsavel" type="text" pInputText />
-        </div>
-        <div class="p-1 col-12">
-            <input formControlName="title" class="text-lg" placeholder="Nome" type="text" pInputText />
-        </div>
-        <div class="p-1 col-12">
-            <p-divider></p-divider>
-        </div>
-        <div class="p-1 col-6">
-            <p-calendar formControlName="createdAt" [showClear]="true" />
-        </div>
-        <div class="p-1 col-6">
-            <p-calendar formControlName="endAt" [showClear]="true" />
-        </div>
-        <div class="p-1 col-12">
-            <textarea formControlName="describe" pInputTextarea></textarea>
-        </div>
-        <p-sidebar [(visible)]="sidebarVisible"  position="right">
-            <ng-template pTemplate="header">
-                <div class="flex align-items-center gap-2">
-                    <p-avatar 
-                    image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" 
-                    shape="circle" />
-                    <span class="font-bold">
-                        Amy Elsner
-                    </span>
-                </div>
-            </ng-template>
-            <p>
-                Lorem ipsum dolor sit amet...
-            </p>
-        </p-sidebar>
-        <p-button (click)="sidebarVisible = true" icon="pi pi-plus" />
-        <div class="p-1 col-12">
-            <button (click)="submit()" pButton label="Entrar" icon="pi pi-user" class="w-full mt-2 mb-3"></button>
-        </div>
-    </form>
-</div>
+<p-sidebar [(visible)]="open" (onHide)="onHide()" (visibleChange)="($event)" position="right">
+    <div class="px-3 py-4">
+        <h2>{{title}}</h2>
+        <p-divider></p-divider>
+        <form class="grid" [formGroup]="form">
+            
+            <div class="p-1 col-4">
+                <p-dropdown
+                formControlName="status"
+                [options]="[
+                    {name:'Pendente', value:0},
+                    {name:'Em Progresso', value:1},
+                    {name:'Concluído', value:2}
+                ]"
+                [showClear]="true"
+                optionLabel="name" 
+                optionValue="value" 
+                placeholder="Status" />
+            </div>
+            <div class="p-1 col-8">
+                <input formControlName="empresa" class="text" placeholder="Empresa responsavel" type="text" pInputText />
+            </div>
+            <div class="p-1 col-12">
+                <input formControlName="title" class="text-lg" placeholder="Nome" type="text" pInputText />
+            </div>
+            <div class="p-1 col-12">
+                <p-divider></p-divider>
+            </div>
+            <div class="p-1 col-6">
+                <p-calendar formControlName="createdAt" [showClear]="true" />
+            </div>
+            <div class="p-1 col-6">
+                <p-calendar formControlName="endAt" [showClear]="true" />
+            </div>
+            <div class="p-1 col-12">
+                <textarea formControlName="describe" pInputTextarea></textarea>
+            </div>
+            <p-sidebar [(visible)]="sidebarVisible"  position="right">
+                <ng-template pTemplate="header">
+                    <div class="flex align-items-center gap-2">
+                        <p-avatar 
+                        image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" 
+                        shape="circle" />
+                        <span class="font-bold">
+                            Amy Elsner
+                        </span>
+                    </div>
+                </ng-template>
+                <p>
+                    Lorem ipsum dolor sit amet...
+                </p>
+            </p-sidebar>
+            <p-button (click)="sidebarVisible = true" icon="pi pi-plus" />
+            <div class="p-1 col-12">
+                <button (click)="submit()" pButton label="Entrar" icon="pi pi-user" class="w-full mt-2 mb-3"></button>
+            </div>
+        </form>
+    </div>
+</p-sidebar>

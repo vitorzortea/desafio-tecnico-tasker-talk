@@ -3,7 +3,7 @@
         <p-toolbar styleClass="p-2">
             <div class="p-toolbar-group-start flex align-items-center gap-3">
                 <h2>Projetos</h2>
-                <p-button (onClick)="isEdit={visible:true, id:'novo'}" styleClass="py-1 px-2">Adicionar +</p-button>
+                <p-button (onClick)="goToCreate()" styleClass="py-1 px-2">Adicionar +</p-button>
             </div>
             <div class="p-toolbar-group-end flex align-items-center gap-3">
                 <p-dropdown 
@@ -67,7 +67,7 @@
     
     <ng-container *ngIf="!loading">
         <p-card *ngFor="let projeto of projetos; let i = index" class="col-6" >
-            <div [ngClass]="{'blur': isEdit.visible}">
+            <div>
                 <p-panel [toggleable]="true" [collapsed]="true" (onAfterToggle)="loadTask($event, i)">
                     <ng-template pTemplate="header">
                         <div class="flex align-items-center gap-2">
@@ -84,11 +84,11 @@
                                         [severity]="(projeto.status)?(projeto.status==1)?'success':'warning':'danger'"
                                     /></span>
                                 <span class="text-xl font-bold line-height-1">{{projeto.title}}</span>
-                                <span class="text-xs line-height-1">{{projeto.createdAt}} - {{projeto.endAt}}</span>
+                                <span class="text-xs line-height-1">{{projeto.createdAt | date}} - {{projeto.endAt | date}}</span>
                             </div>
                         </div>
                     </ng-template>
-                    <p>{{projeto.status}} - colocar no obj</p>
+                    <p>{{projeto.describe}}</p>
                     <p-divider />
                     <ng-container *ngIf="projeto.listTask?.length">
                         <ng-container *ngFor="let task of projeto.listTask">
@@ -114,7 +114,7 @@
                                 <a
                                     pRipple
                                     class="flex align-items-center p-menuitem-link"
-                                    (click)="this.hubMenu(projeto.id || '', item.id)"
+                                    (click)="this.hubMenu(projeto, item.id)"
                                 >
                                     <span [class]="item.icon"></span>
                                     <span class="ml-2">{{ item.label }}</span>
@@ -127,7 +127,7 @@
                     <div class="flex align-items-center gap-2">
                         <div class="responsavel">
                             <p-avatar 
-                            [image]="projeto.user.avatar" 
+                            [image]="projeto?.user?.avatar" 
                             size="large"
                             shape="circle"
                             />
@@ -136,7 +136,7 @@
                     </div>
                     <p-progressBar class="flex-auto" [value]="projeto.porcent" max="100" [style]="{ height: '1.2em' }" />
                     <div>
-                        <small>Alterado:</small> <span class="font-bold"> 16/06/2024</span>
+                        <small>Alterado:</small> <span class="font-bold"> {{projeto.editedAt | date}}</span>
                     </div>
                 </div>
             </div>
@@ -165,7 +165,5 @@
             </p-card>
         </ng-container>
     </ng-container>
-    <p-sidebar [(visible)]="isEdit.visible" (onHide)="onHide()" (onShow)="onShow()" position="right">
-        <router-outlet></router-outlet>
-    </p-sidebar>
 </div>
+<router-outlet></router-outlet>
