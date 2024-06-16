@@ -5,6 +5,7 @@ import { CrudService } from '../../../core/services/crud.service';
 import Swal from 'sweetalert2';
 
 type FormProjeto = {
+  describe: string;
   createdAt: Date,
   endAt: Date,
   title: string,
@@ -57,7 +58,7 @@ export class EditComponent {
       porcent: [0, Validators.required],
       user: this.fb.group({}),
       editedAt: [new Date(), Validators.required],
-      id: [{value: null, disable:true}, Validators.required],
+      id: [null, Validators.required],
       userId: [null, Validators.required],
       listTask: this.fb.array([{
             createdAt: [new Date(), Validators.required],
@@ -74,17 +75,43 @@ export class EditComponent {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     if(this.id!='novo'){
       this.title = 'Editar Projeto'
+      this.getProjecct();
     }
   }
-
   
+  getProjecct(){
+    this.crud.getID('project', this.id || '').subscribe(e=>this.loadForm(e as FormProjeto));
+  }
+  loadForm(e:FormProjeto){
+    this.form = this.fb.group({
+      status:  [e.status, Validators.required],
+      empresa:  [e.empresa, Validators.required],
+      title:  [e.title , Validators.required],
+      createdAt: [new Date(e.createdAt ), Validators.required],
+      endAt: [new Date(e.endAt ), Validators.required],
+      describe: [e.describe , Validators.required],
+      imagem: [e.imagem , Validators.required],
+      porcent: [e.porcent, Validators.required],
+      user: this.fb.group(e.user),
+      editedAt: [new Date(e.editedAt ), Validators.required],
+      id: [e.id, Validators.required],
+      userId: [e.userId, Validators.required],
+      listTask: this.fb.array([...e.listTask]),
+    });
+  }  
 
   submit(){
+    this.form.markAllAsTouched();
+    console.log('entrou', )
     if(this.form.valid){
-      const value = this.form.value
-      const save = (value.id) ? 'post': 'put'; 
-      this.crud[save]('project', value, value.id).subscribe({
-        next:()=>{
+      const value = this.form.value as FormProjeto;
+      const user = (value.userId) ? `users/${value.userId}/` : ''
+      const save = (value.id) 
+        ? this.crud.put(user+'project', value.id, value)
+        : this.crud.post(user+'project', value.id);
+      save.subscribe({
+        next:(e)=>{
+          this.loadForm(e as FormProjeto);
           Swal.fire({
             icon:'success',
             text:'Projeto Salvo com sucesso'

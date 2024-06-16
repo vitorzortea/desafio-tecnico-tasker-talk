@@ -67,75 +67,77 @@
     
     <ng-container *ngIf="!loading">
         <p-card *ngFor="let projeto of projetos; let i = index" class="col-6" >
-            <p-panel [toggleable]="true" [collapsed]="true" (onAfterToggle)="loadTask($event, i)">
-                <ng-template pTemplate="header">
-                    <div class="flex align-items-center gap-2">
-                        <p-avatar 
-                            [image]="projeto.imagem" 
-                            size="xlarge"
-                            [style]="{overflow:'hidden', borderRadius:'6px'}" 
-                        />                    
-                        <div class="flex flex-column gap-1">
-                            <span class="font-bold">
-                                {{projeto.empresa}} 
-                                <p-tag 
-                                    [value]="(projeto.status)?(projeto.status==1)?'Concluída':'Em Progresso':'Pendente'"
-                                    [severity]="(projeto.status)?(projeto.status==1)?'success':'warning':'danger'"
-                                /></span>
-                            <span class="text-xl font-bold line-height-1">{{projeto.title}}</span>
-                            <span class="text-xs line-height-1">{{projeto.createdAt}} - {{projeto.endAt}}</span>
+            <div [ngClass]="{'blur': isEdit.visible}">
+                <p-panel [toggleable]="true" [collapsed]="true" (onAfterToggle)="loadTask($event, i)">
+                    <ng-template pTemplate="header">
+                        <div class="flex align-items-center gap-2">
+                            <p-avatar 
+                                [image]="projeto.imagem" 
+                                size="xlarge"
+                                [style]="{overflow:'hidden', borderRadius:'6px'}" 
+                            />                    
+                            <div class="flex flex-column gap-1">
+                                <span class="font-bold">
+                                    {{projeto.empresa}} 
+                                    <p-tag 
+                                        [value]="(projeto.status)?(projeto.status==1)?'Concluída':'Em Progresso':'Pendente'"
+                                        [severity]="(projeto.status)?(projeto.status==1)?'success':'warning':'danger'"
+                                    /></span>
+                                <span class="text-xl font-bold line-height-1">{{projeto.title}}</span>
+                                <span class="text-xs line-height-1">{{projeto.createdAt}} - {{projeto.endAt}}</span>
+                            </div>
                         </div>
-                    </div>
-                </ng-template>
-                <p>{{projeto.status}} - colocar no obj</p>
-                <p-divider />
-                <ng-container *ngIf="projeto.listTask?.length">
-                    <ng-container *ngFor="let task of projeto.listTask">
-                        <a routerLink="/" class="flex align-items-center no-underline text-color">
-                            <p-knob class="mr-2" [(ngModel)]="task.porcent" [size]="30" [strokeWidth]="15" [disabled]="true" [readonly]="true" />
-                            <span>{{task.title}}</span>
-                        </a>
-                    </ng-container>
-                </ng-container>
-                <ng-container *ngIf="!projeto.listTask">
-                        <div class="flex align-items-center no-underline text-color">
-                            <p-skeleton class="mr-2" width="30px" height="30px" />
-                            <p-skeleton width="8rem" height="1em" />
-                        </div>
-                </ng-container>
-                
-                <ng-template pTemplate="icons">
-                    <button class="p-panel-header-icon p-link mr-2" (click)="menu.toggle($event)">
-                        <span class="pi pi-cog"></span>
-                    </button>
-                    <p-menu #menu id="config_menu" [model]="menuProjeto" [popup]="true">
-                        <ng-template pTemplate="item" let-item>
-                            <a
-                                pRipple
-                                class="flex align-items-center p-menuitem-link"
-                                (click)="this.hubMenu(projeto.id || '', 'edit')"
-                            >
-                                <span [class]="item.icon"></span>
-                                <span class="ml-2">{{ item.label }}</span>
+                    </ng-template>
+                    <p>{{projeto.status}} - colocar no obj</p>
+                    <p-divider />
+                    <ng-container *ngIf="projeto.listTask?.length">
+                        <ng-container *ngFor="let task of projeto.listTask">
+                            <a routerLink="/" class="flex align-items-center no-underline text-color">
+                                <p-knob class="mr-2" [(ngModel)]="task.porcent" [size]="30" [strokeWidth]="15" [disabled]="true" [readonly]="true" />
+                                <span>{{task.title}}</span>
                             </a>
-                        </ng-template>
-                    </p-menu>
-                </ng-template>
-            </p-panel>
-            <div class="flex flex-wrap align-items-center justify-content-between gap-3 px-3 pb-3 pt-1">
-                <div class="flex align-items-center gap-2">
-                    <div class="responsavel">
-                        <p-avatar 
-                        [image]="projeto.user.avatar" 
-                        size="large"
-                        shape="circle"
-                        />
-                        <span>Responsável</span>
+                        </ng-container>
+                    </ng-container>
+                    <ng-container *ngIf="!projeto.listTask">
+                            <div class="flex align-items-center no-underline text-color">
+                                <p-skeleton class="mr-2" width="30px" height="30px" />
+                                <p-skeleton width="8rem" height="1em" />
+                            </div>
+                    </ng-container>
+                    
+                    <ng-template pTemplate="icons">
+                        <button class="p-panel-header-icon p-link mr-2" (click)="menu.toggle($event)">
+                            <span class="pi pi-cog"></span>
+                        </button>
+                        <p-menu #menu id="config_menu" [model]="menuProjeto" [popup]="true">
+                            <ng-template pTemplate="item" let-item>
+                                <a
+                                    pRipple
+                                    class="flex align-items-center p-menuitem-link"
+                                    (click)="this.hubMenu(projeto.id || '', 'edit')"
+                                >
+                                    <span [class]="item.icon"></span>
+                                    <span class="ml-2">{{ item.label }}</span>
+                                </a>
+                            </ng-template>
+                        </p-menu>
+                    </ng-template>
+                </p-panel>
+                <div class="flex flex-wrap align-items-center justify-content-between gap-3 px-3 pb-3 pt-1">
+                    <div class="flex align-items-center gap-2">
+                        <div class="responsavel">
+                            <p-avatar 
+                            [image]="projeto.user.avatar" 
+                            size="large"
+                            shape="circle"
+                            />
+                            <span>Responsável</span>
+                        </div>
                     </div>
-                </div>
-                <p-progressBar class="flex-auto" [value]="projeto.porcent" max="100" [style]="{ height: '1.2em' }" />
-                <div>
-                    <small>Alterado:</small> <span class="font-bold"> 16/06/2024</span>
+                    <p-progressBar class="flex-auto" [value]="projeto.porcent" max="100" [style]="{ height: '1.2em' }" />
+                    <div>
+                        <small>Alterado:</small> <span class="font-bold"> 16/06/2024</span>
+                    </div>
                 </div>
             </div>
         </p-card>

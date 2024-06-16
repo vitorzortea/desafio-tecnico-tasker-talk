@@ -129,7 +129,10 @@ export class ListComponent {
     //this[goTo](id);
   }
   onShow(toogle?:boolean){ if(!toogle){this.router.navigate([this.isEdit.id], {relativeTo: this.activatedRoute});} }
-  onHide(){ this.router.navigate(['./'], {relativeTo: this.activatedRoute}); }
+  onHide(){
+    this.router.navigate(['./'], {relativeTo: this.activatedRoute});
+    this.loadLit();
+  }
   onPageChange(event: PaginatorState) {
     this.paginator = event as Paginator;
     this.loadLit();

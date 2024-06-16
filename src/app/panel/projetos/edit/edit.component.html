@@ -9,7 +9,7 @@
             [options]="[
                 {name:'Pendente', value:0},
                 {name:'Em Progresso', value:1},
-                {name:'Concluído', value:3}
+                {name:'Concluído', value:2}
             ]"
             [showClear]="true"
             optionLabel="name" 
@@ -38,8 +38,8 @@
             <ng-template pTemplate="header">
                 <div class="flex align-items-center gap-2">
                     <p-avatar 
-                        image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" 
-                        shape="circle" />
+                    image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" 
+                    shape="circle" />
                     <span class="font-bold">
                         Amy Elsner
                     </span>
@@ -50,5 +50,8 @@
             </p>
         </p-sidebar>
         <p-button (click)="sidebarVisible = true" icon="pi pi-plus" />
+        <div class="p-1 col-12">
+            <button (click)="submit()" pButton label="Entrar" icon="pi pi-user" class="w-full mt-2 mb-3"></button>
+        </div>
     </form>
 </div>
