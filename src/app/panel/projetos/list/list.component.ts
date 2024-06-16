@@ -5,6 +5,7 @@ import { Paginator } from '../../../core/model/project copy';
 import { PaginatorState } from 'primeng/paginator';
 import { PanelAfterToggleEvent } from 'primeng/panel';
 import { Task, TasktList } from '../../../core/model/Task';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-list',
@@ -13,9 +14,12 @@ import { Task, TasktList } from '../../../core/model/Task';
 })
 export class ListComponent {
   loading=true;
+  isMe = false;
+  status:string|undefined;
   projetos:Project[]|undefined;
   total:number = 0;
-  paginator:Paginator = {first: 0, rows: 4, page:0, pageCount:0};
+  paginator:Paginator = {first: 0, rows: 6, page:0, pageCount:0};
+  filter:{[key:string]:any}={};
 
   constructor(
     private crud:CrudService<Project | ProjectList | TasktList>,
@@ -23,13 +27,25 @@ export class ListComponent {
     this.loadLit();
   }
   loadLit(){
+    this.projetos=[];
     this.loading=true;
-    this.crud.get('project', {page:(this.paginator?.page || 0)+1, limit: (this.paginator?.rows|| 1)}).subscribe(e=>{
+    this.crud.get('project', { ...this.filter, page:(this.paginator?.page || 0)+1, limit: (this.paginator?.rows|| 1)}).subscribe({
+      next:(e)=>{
       const _e = e as ProjectList;
       this.loading=false;
       this.total = _e.count;
-      this.projetos = _e.items;
-    })
+      this.projetos = _e.items/*.map(f=>{
+        //Uso Temporario Pois o MokApi não limita numeros Randomicos
+        if(f.status>=4){
+          f.status=0;
+          this.crud.put('project', (f.id as string), f).subscribe();
+        } return f});
+        */
+      },
+      error:(err)=>{
+        this.loading=false;
+      }
+  })
   }
   loadTask(event:PanelAfterToggleEvent, index:number){
     if(!event?.collapsed){
@@ -48,6 +64,24 @@ export class ListComponent {
     }
   }
 
+  listMe(){
+    if(!this.isMe){
+      delete this.filter['userId'];
+      this.loadLit();
+      return;
+    }
+    this.filter['userId'] = environment.user?.id;
+    this.loadLit();
+  }
+  listStatus(){
+    if(this.status === undefined){
+      delete this.filter['status'];
+      this.loadLit();
+      return;
+    }
+    this.filter['status'] = this.status;
+    this.loadLit();
+  }
   onPageChange(event: PaginatorState) {
     this.paginator = event as Paginator;
     this.loadLit();

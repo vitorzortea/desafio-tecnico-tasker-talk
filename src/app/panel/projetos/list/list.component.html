@@ -1,19 +1,32 @@
 <div class="grid">
     <p-card class="col-12">
-        <p-toolbar>
+        <p-toolbar styleClass="p-2">
             <div class="p-toolbar-group-start">
-                <p-button icon="pi pi-plus" class="mr-2"/>
-                <p-button icon="pi pi-print" class="mr-2"/>
-                <p-button icon="pi pi-upload" />
+                <h2>Projetos</h2>
             </div>
-            <div class="p-toolbar-group-center">
-                <span class="p-input-icon-left">
-                    <i class="pi pi-search"></i>
-                    <input pInputText placeholder="Search" />
-                </span>
-            </div>
-            <div class="p-toolbar-group-end">
-               
+            <div class="p-toolbar-group-end flex align-items-center gap-3">
+                <p-dropdown 
+                    [options]="[
+                        {name:'Todos', value:undefined},
+                        {name:'Pendente', value:0},
+                        {name:'Em Progresso', value:1},
+                        {name:'Concluído', value:3},
+                    ]" 
+                    [(ngModel)]="status" 
+                    optionLabel="name"
+                    optionValue="value" 
+                    placeholder="Status"
+                    (onChange)="this.listStatus()"
+                />
+                <p-toggleButton 
+                [(ngModel)]="isMe" 
+                [onLabel]="'Selecionado meus projetos'" 
+                offLabel="Selecionar meus projetos"
+                offIcon="pi pi-circle" 
+                [onIcon]="'pi pi-check'" 
+                (onChange)="this.listMe()"
+                 />
+                 <!-- [onIcon]="'pi pi-check'" -> Transformei 'pi pi-check' em umas string pe direto no HTML estava dando um erro no TS sem motivo -->
             </div>
         </p-toolbar>
     </p-card>
@@ -52,93 +65,108 @@
     </ng-container>
     
     <ng-container *ngIf="!loading">
-    <p-card *ngFor="let projeto of projetos; let i = index" class="col-6" >
-        <p-panel [toggleable]="true" [collapsed]="true" (onAfterToggle)="loadTask($event, i)">
-            <ng-template pTemplate="header">
-                <div class="flex align-items-center gap-2">
-                    <p-avatar 
-                        [image]="projeto.imagem" 
-                        size="xlarge"
-                        [style]="{overflow:'hidden', borderRadius:'6px'}" 
-                    />
-                                            
-                    <div class="flex flex-column gap-2">
-                        <span class="font-bold">{{projeto.empresa}}</span>
-                        <span class="text-xl font-bold line-height-1">{{projeto.title}}</span>
-                        <span class="text-xs line-height-1">{{projeto.createdAt}} - {{projeto.endAt}}</span>
+        <p-card *ngFor="let projeto of projetos; let i = index" class="col-6" >
+            <p-panel [toggleable]="true" [collapsed]="true" (onAfterToggle)="loadTask($event, i)">
+                <ng-template pTemplate="header">
+                    <div class="flex align-items-center gap-2">
+                        <p-avatar 
+                            [image]="projeto.imagem" 
+                            size="xlarge"
+                            [style]="{overflow:'hidden', borderRadius:'6px'}" 
+                        />
+                                                
+                        <div class="flex flex-column gap-1">
+                            <span class="font-bold">
+                                {{projeto.empresa}} 
+                                <p-tag 
+                                    [value]="(projeto.status)?(projeto.status==1)?'Concluída':'Em Progresso':'Pendente'"
+                                    [severity]="(projeto.status)?(projeto.status==1)?'success':'warning':'danger'"
+                                /></span>
+                            <span class="text-xl font-bold line-height-1">{{projeto.title}}</span>
+                            <span class="text-xs line-height-1">{{projeto.createdAt}} - {{projeto.endAt}}</span>
+                        </div>
                     </div>
-                </div>
-            </ng-template>
-            <p>{{projeto.status}} - colocar no obj</p>
-            <p-divider />
-            <ng-container *ngIf="projeto.listTask?.length">
-                <ng-container *ngFor="let task of projeto.listTask">
-                    <a routerLink="/" class="flex align-items-center no-underline text-color">
-                        <p-knob class="mr-2" [(ngModel)]="task.porcent" [size]="30" [strokeWidth]="15" [disabled]="true" [readonly]="true" />
-                        <span>{{task.title}}</span>
-                    </a>
+                </ng-template>
+                <p>{{projeto.status}} - colocar no obj</p>
+                <p-divider />
+                <ng-container *ngIf="projeto.listTask?.length">
+                    <ng-container *ngFor="let task of projeto.listTask">
+                        <a routerLink="/" class="flex align-items-center no-underline text-color">
+                            <p-knob class="mr-2" [(ngModel)]="task.porcent" [size]="30" [strokeWidth]="15" [disabled]="true" [readonly]="true" />
+                            <span>{{task.title}}</span>
+                        </a>
+                    </ng-container>
                 </ng-container>
-            </ng-container>
-            <ng-container *ngIf="!projeto.listTask">
-                    <div class="flex align-items-center no-underline text-color">
-                        <p-skeleton class="mr-2" width="30px" height="30px" />
-                        <p-skeleton width="8rem" height="1em" />
+                <ng-container *ngIf="!projeto.listTask">
+                        <div class="flex align-items-center no-underline text-color">
+                            <p-skeleton class="mr-2" width="30px" height="30px" />
+                            <p-skeleton width="8rem" height="1em" />
+                        </div>
+                </ng-container>
+                
+                <ng-template pTemplate="icons">
+                    <button class="p-panel-header-icon p-link mr-2" (click)="menu.toggle($event)">
+                        <span class="pi pi-cog"></span>
+                    </button>
+                    <p-menu #menu id="config_menu" [model]="[
+                    {
+                        label: 'Editar Projeto',
+                        icon: 'pi pi-pen-to-square'
+                    },
+                    {
+                        label: 'Adicionar Tarefa',
+                        icon: 'pi pi-list-check'
+                    },
+                    {
+                        separator: true
+                    },
+                    {
+                        label: 'Deletar',
+                        icon: 'pi pi-times'
+                    }]" [popup]="true" />
+                </ng-template>
+            </p-panel>
+            <div class="flex flex-wrap align-items-center justify-content-between gap-3 px-3 pb-3 pt-1">
+                <div class="flex align-items-center gap-2">
+                    <div class="responsavel">
+                        <p-avatar 
+                        [image]="projeto.user.avatar" 
+                        size="large"
+                        shape="circle"
+                        />
+                        <span>Responsável</span>
                     </div>
-            </ng-container>
-            
-            <ng-template pTemplate="icons">
-                <button class="p-panel-header-icon p-link mr-2" (click)="menu.toggle($event)">
-                    <span class="pi pi-cog"></span>
-                </button>
-                <p-menu #menu id="config_menu" [model]="[
-                {
-                    label: 'Editar Projeto',
-                    icon: 'pi pi-pen-to-square'
-                },
-                {
-                    label: 'Adicionar Tarefa',
-                    icon: 'pi pi-list-check'
-                },
-                {
-                    separator: true
-                },
-                {
-                    label: 'Deletar',
-                    icon: 'pi pi-times'
-                }]" [popup]="true" />
-            </ng-template>
-        </p-panel>
-        <div class="flex flex-wrap align-items-center justify-content-between gap-3 px-3 pb-3 pt-1">
-            <div class="flex align-items-center gap-2">
-                <div class="responsavel">
-                    <p-avatar 
-                    [image]="projeto.user.avatar" 
-                    size="large"
-                    shape="circle"
-                    />
-                    <span>Responsável</span>
+                </div>
+                <p-progressBar class="flex-auto" [value]="projeto.porcent" max="100" [style]="{ height: '1.2em' }" />
+                <div>
+                    <small>Alterado:</small> <span class="font-bold"> 16/06/2024</span>
                 </div>
             </div>
-            <p-progressBar class="flex-auto" [value]="projeto.porcent" max="100" [style]="{ height: '1.2em' }" />
-            <div>
-                <small>Alterado:</small> <span class="font-bold"> 16/06/2024</span>
+        </p-card>
+        <p-card class="col-12"  *ngIf="projetos?.length">
+            <div class="flex align-items-center justify-content-end">
+                    <p-paginator
+                        (onPageChange)="onPageChange($event)"
+                        [first]="this.paginator.first"
+                        [rows]="this.paginator.rows"
+                        [rowsPerPageOptions]="[6, 10, 20, 30]"
+                        [totalRecords]="total"
+                        [showPageLinks]="false"
+                        [showCurrentPageReport]="true"
+                        [currentPageReportTemplate]="(this.paginator.first+1)+'-'+((this.paginator.first)+(projetos?.length || 0))+' de {totalRecords}'" 
+                    >
+                    </p-paginator>
             </div>
-        </div>
-    </p-card>
-    <p-card class="col-12">
-        <div class="flex align-items-center justify-content-end">
-                <p-paginator
-                    (onPageChange)="onPageChange($event)"
-                    [first]="this.paginator.first"
-                    [rows]="this.paginator.rows"
-                    [rowsPerPageOptions]="[4, 10, 20, 30]"
-                    [totalRecords]="total"
-                    [showPageLinks]="false"
-                    [showCurrentPageReport]="true"
-                    [currentPageReportTemplate]="(this.paginator.first+1)+'-'+((this.paginator.first)+(projetos?.length || 0))+' de {totalRecords}'" 
-                >
-                </p-paginator>
-        </div>
-    </p-card>
+        </p-card>
+
+
+        <ng-container *ngIf="!projetos?.length">
+            <p-card class="col-12" styleClass="p-4">
+                <h3>Não há nada aqui!</h3>
+                <p>Nenhum Projeto encontrado</p>
+            </p-card>
+        </ng-container>
     </ng-container>
+
+    
 </div>
