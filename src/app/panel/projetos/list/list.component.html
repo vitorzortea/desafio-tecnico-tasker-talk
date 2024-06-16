@@ -114,7 +114,7 @@
                                 <a
                                     pRipple
                                     class="flex align-items-center p-menuitem-link"
-                                    (click)="this.hubMenu(projeto.id || '', 'edit')"
+                                    (click)="this.hubMenu(projeto.id || '', item.id)"
                                 >
                                     <span [class]="item.icon"></span>
                                     <span class="ml-2">{{ item.label }}</span>

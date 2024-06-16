@@ -10,6 +10,7 @@ import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
 import { Task, TasktList } from '../../../core/model/task';
 import { NavigationService } from '../../../core/services/navigation-service.service';
 import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list',
@@ -28,17 +29,18 @@ export class ListComponent {
         label: 'Editar Projeto',
         icon: 'pi pi-pen-to-square',
         id:'edit'
-    },
-    {
+      },
+      {
         label: 'Adicionar Tarefa',
         icon: 'pi pi-list-check'
-    },
-    {
+      },
+      {
         separator: true
-    },
-    {
+      },
+      {
         label: 'Deletar',
-        icon: 'pi pi-times'
+        icon: 'pi pi-times',
+        id:'delete'
   }]
 
 
@@ -122,9 +124,10 @@ export class ListComponent {
   }
 
   
-  hubMenu(id:string, goTo:'edit'){
+  hubMenu(id:string, goTo:'edit'|'delete'){
     ({
-      edit:()=>{this.isEdit={visible:true, id}}
+      edit:()=>{this.isEdit={visible:true, id}},
+      delete:()=>{this.delete(id)},
     }[goTo])();
     //this[goTo](id);
   }
@@ -133,6 +136,43 @@ export class ListComponent {
     this.router.navigate(['./'], {relativeTo: this.activatedRoute});
     this.loadLit();
   }
+  delete(i:string){
+    Swal.fire({
+      title: 'Você tem certeza?',
+      text: 'Seu Projeto não poderá ser recuperado',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Não'
+    }).then((e)=>{
+      if(e.isConfirmed){
+        const user = (this.projetos as Project[])[Number(i)-1].userId;
+        this.crud.delete('users/'+user+'/'+'project', i).subscribe({
+          next:()=>{
+            Swal.fire({
+              icon:'success',
+              text:'Projeto Deletado com sucesso',
+              timer: 2000
+            })
+            this.loadLit();
+          },
+          error:()=>{
+            Swal.fire({
+              icon:'error',
+              text:'Algo Deu Errado',
+              timer: 2000
+            })
+            this.loadLit();
+          }
+        })
+
+      }
+      return e
+    });
+  }
+
+
+
   onPageChange(event: PaginatorState) {
     this.paginator = event as Paginator;
     this.loadLit();
