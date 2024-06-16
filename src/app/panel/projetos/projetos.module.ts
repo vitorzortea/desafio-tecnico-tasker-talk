@@ -19,6 +19,13 @@ import { PaginatorModule } from 'primeng/paginator';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { TagModule } from 'primeng/tag';
 import { SidebarModule } from 'primeng/sidebar'
+import { CalendarModule } from 'primeng/calendar';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { ReactiveFormsModule } from '@angular/forms';
+
+
+
 
 
 
@@ -31,6 +38,8 @@ import { SidebarModule } from 'primeng/sidebar'
   imports: [
     CommonModule,
     ProjetosRoutingModule,
+    ReactiveFormsModule,
+    //NGPRIME
     PanelModule,
     CardModule,
     AvatarModule,
@@ -46,6 +55,9 @@ import { SidebarModule } from 'primeng/sidebar'
     ToggleButtonModule,
     TagModule,
     SidebarModule,
+    CalendarModule,
+    InputTextModule,
+    InputTextareaModule,
   ]
 })
 export class ProjetosModule { }

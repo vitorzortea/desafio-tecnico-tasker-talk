@@ -20,3 +20,8 @@
         }
     }
 }
+:host ::ng-deep{
+    .p-inputtext{
+        padding: calc(var(--font-size) * .8)
+    }
+}

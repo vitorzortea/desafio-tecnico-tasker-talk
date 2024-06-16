@@ -4,10 +4,12 @@ import { Project, ProjectList } from '../../../core/model/project';
 import { Paginator } from '../../../core/model/project copy';
 import { PaginatorState } from 'primeng/paginator';
 import { PanelAfterToggleEvent } from 'primeng/panel';
-import { Task, TasktList } from '../../../core/model/Task';
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
+import { Task, TasktList } from '../../../core/model/task';
+import { NavigationService } from '../../../core/services/navigation-service.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -15,6 +17,7 @@ import { MenuItem, MenuItemCommandEvent } from 'primeng/api';
   styleUrl: './list.component.scss'
 })
 export class ListComponent {
+  private subscription: Subscription;
   projetos:Project[]|undefined;
   status:string|undefined;
   loading=true;
@@ -46,14 +49,21 @@ export class ListComponent {
   constructor(
     private router:Router,
     private activatedRoute:ActivatedRoute,
+    private navigationService: NavigationService,
     private crud:CrudService<Project | ProjectList | TasktList>,
   ){
+    this.subscription = this.navigationService.confirmNavigation$.subscribe(() => { this.isEdit.visible = true; });
     this.loadLit();
     const idAtivo = router.url.split('/')
     if(idAtivo[idAtivo.length-1] != 'projetos'){
       this.isEdit={visible:true, id:router.url.split('/')[router.url.split('/').length-1]}
     }
   }
+
+
+
+
+
   loadLit(){
     this.projetos=[];
     this.loading=true;
@@ -118,7 +128,7 @@ export class ListComponent {
     }[goTo])();
     //this[goTo](id);
   }
-  onShow(){ this.router.navigate([this.isEdit.id], {relativeTo: this.activatedRoute}); }
+  onShow(toogle?:boolean){ if(!toogle){this.router.navigate([this.isEdit.id], {relativeTo: this.activatedRoute});} }
   onHide(){ this.router.navigate(['./'], {relativeTo: this.activatedRoute}); }
   onPageChange(event: PaginatorState) {
     this.paginator = event as Paginator;

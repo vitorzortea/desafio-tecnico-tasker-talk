@@ -532,13 +532,14 @@ app-root > span > router-outlet + *{
   p-calendar.ng-dirty.ng-invalid > .p-calendar > .p-inputtext {
     border-color: var(--red-500);
   }
-
+  /*
   .p-calendar:not(.p-calendar-disabled).p-focus > .p-inputtext {
     outline: 0 none;
     outline-offset: 0;
     box-shadow: 0 0 0 0.2rem var(--primary-50);
     border-color: var(--primary-500);
   }
+  */
 
   .p-datepicker {
     padding: 0.5rem;
@@ -616,28 +617,49 @@ app-root > span > router-outlet + *{
     height: 2.5rem;
   }
   .p-datepicker table td {
-    padding: 0.5rem;
+    padding: calc(var(--font-size) * .1);
   }
   .p-datepicker table td > span {
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 50%;
-    transition: box-shadow 0.2s;
+    width: calc(var(--font-size) * 2.5);
+    height: calc(var(--font-size) * 2.5);
+    color: var(--surface-500);
+    background:color-mix(in srgb, var(--surface-0), transparent 20%);
     border: 1px solid transparent;
+    border-radius: var(--border-radius);
+    box-shadow:
+      inset 0px 0px 0px transparent,
+      inset -1px -1px 2px var(--surface-0),
+      0px 0px 0px transparent,
+      -2px -2px 3px var(--surface-0),
+      inset 0 0 0 0px transparent;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
   }
   .p-datepicker table td > span.p-highlight {
-    color: var(--primary-600);
-    background: var(--surface-50);
+    font-weight: 600;
+    cursor: default;
+    color: var(--primary-500);
+    background: color-mix(in srgb, var(--primary-50), var(--primary-100) 30%) !important;    
+    box-shadow:
+      inset -1px -1px 2px 1px var(--primary-300),
+      inset 1px 1px 2px var(--primary-50),
+      1px 1px 2px 1px var(--primary-50),
+      0px 0px 0px transparent,
+      inset 0 0 0 0px transparent;
   }
   .p-datepicker table td > span:focus {
     outline: 0 none;
     outline-offset: 0;
-    box-shadow: 0 0 0 0.2rem var(--primary-50);
+    /*box-shadow: 0 0 0 0.2rem var(--primary-50);*/
   }
   .p-datepicker table td.p-datepicker-today > span {
-    background: #d1d5db;
-    color: var(--surface-400);
-    border-color: transparent;
+    color: var(--primary-500);
+    background: color-mix(in srgb, var(--surface-0), var(--primary-50) 50%);
+    box-shadow:
+      inset -1px -1px 2px var(--primary-300),
+      inset 1px 1px 2px var(--primary-50),
+      1px 1px 2px 1px var(--primary-100),
+      -1px -1px 1px var(--primary-50),
+      inset 0 0 0 0px transparent;
   }
   .p-datepicker table td.p-datepicker-today > span.p-highlight {
     color: var(--primary-600);
@@ -724,7 +746,14 @@ app-root > span > router-outlet + *{
     padding-right: 0;
   }
   .p-datepicker:not(.p-disabled) table td span:not(.p-highlight):not(.p-disabled):hover {
-    background: var(--surface-50);
+    background: var(--primary-50);
+    color: var(--primary-500);
+    box-shadow:
+      inset 1px 1px 2px var(--primary-300),
+      inset -1px -1px 2px var(--surface-0),
+      -1px -1px 2px 1px var(--primary-50),
+      0px 0px 0px transparent,
+      inset 0 0 0 0px transparent;
   }
   .p-datepicker:not(.p-disabled) table td span:not(.p-highlight):not(.p-disabled):focus {
     outline: 0 none;
@@ -1035,6 +1064,7 @@ app-root > span > router-outlet + *{
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   }
 
+  /*
   .p-dropdown {
     background: var(--surface-0);
     border: 1px solid #d1d5db;
@@ -1050,9 +1080,11 @@ app-root > span > router-outlet + *{
     box-shadow: 0 0 0 0.2rem var(--primary-50);
     border-color: var(--primary-500);
   }
+  */
   .p-dropdown.p-dropdown-clearable .p-dropdown-label {
-    padding-right: 1.75rem;
+    padding: calc(var(--font-size) * .75) 1.75rem calc(var(--font-size) * .75) calc(var(--font-size) * .5);
   }
+  /*
   .p-dropdown .p-dropdown-label {
     background: transparent;
     border: 0 none;
@@ -1064,19 +1096,23 @@ app-root > span > router-outlet + *{
     outline: 0 none;
     box-shadow: none;
   }
+  */
   .p-dropdown .p-dropdown-trigger {
     background: transparent;
     color: var(--surface-500);
     width: 1.5rem;
     margin-left: -1.75rem;
   }
+  
   .p-dropdown .p-dropdown-trigger .p-icon{
     width: .7rem;
     height: .7rem;
   }
   .p-dropdown .p-dropdown-clear-icon {
-    color: var(--surface-500);
-    right: 3rem;
+    right: .5em;
+    background: var(--surface-0);
+    width: 1em;
+    height: 1.3em;
   }
   .p-dropdown.p-invalid.p-component {
     border-color: var(--red-500);
@@ -1371,7 +1407,7 @@ app-root > span > router-outlet + *{
     font-size: var(--font-size);
     color: var(--surface-400);
     background: color-mix(in srgb, var(--surface-0), transparent 70%);
-    padding: 0.6rem 0.6rem;
+    padding: calc(var(--font-size) * .5);
     border: 2px solid color-mix(in srgb, var(--surface-50), var(--surface-100) 50%);
     border-radius: var(--border-radius);
     box-shadow:
@@ -1384,6 +1420,7 @@ app-root > span > router-outlet + *{
     transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
     appearance: none;
   }
+  .p-dropdown:not(.p-disabled):hover .p-inputtext, .p-dropdown:not(.p-disabled) .p-inputtext:hover,
   .p-inputtext:enabled:hover {
     background: color-mix(in srgb, var(--surface-0), transparent 10%);
     border-color: var(--primary-500);
@@ -1395,11 +1432,12 @@ app-root > span > router-outlet + *{
       0 0 0 3px color-mix(in srgb, var(--primary-500), transparent 80%),
       inset 0 0 0 3px color-mix(in srgb, var(--primary-500), transparent 80%);
   }
+  .p-dropdown.p-focus:focus .p-inputtext, .p-dropdown.p-focus .p-inputtext:focus,
   .p-inputtext:enabled:focus {
     outline: 0 none;
     outline-offset: 0;
     background: color-mix(in srgb, var(--surface-0), transparent 50%);
-    border-color: transparent;
+    border-color: var(--primary-100);
     box-shadow:
       inset 0px 0px 0px var(--surface-200),
       inset 0px 0px 0px var(--surface-0),
@@ -4103,7 +4141,10 @@ app-root > span > router-outlet + *{
     padding: 0 1.25rem;
   }
   .p-divider.p-divider-horizontal:before {
-    border-top: 1px #e5e7eb;
+    box-shadow: 0 2px 2px var(--surface-300), 0 0px 5px var(--surface-0);
+    background: none;
+    border: none !important;
+    height: 1px;
   }
   .p-divider.p-divider-horizontal .p-divider-content {
     padding: 0 0.5rem;
@@ -4672,13 +4713,15 @@ app-root > span > router-outlet + *{
   }
 
   .p-sidebar {
-    background: var(--surface-0);
+    background: var(--surface-50);
     color: var(--surface-400);
     border: 0 none;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  }
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), inset 1px 1px 2px 1px var(--surface-0);
+}
   .p-sidebar .p-sidebar-header {
-    padding: 1.25rem;
+    padding: 2px calc(var(--font-size)* .5);
+    background: color-mix(in srgb, var(--surface-100), transparent 40%);
+    box-shadow: inset 0px -8px 8px -4px var(--surface-100);
   }
   .p-sidebar .p-sidebar-header .p-sidebar-close,
 .p-sidebar .p-sidebar-header .p-sidebar-icon {
@@ -6665,5 +6708,10 @@ app-root > span > router-outlet + *{
   .p-steps .p-steps-item.p-highlight .p-steps-number {
     background: var(--primary-500);
     color: var(--surface-0);
+  }
+
+  .p-sidebar-right {
+    width: 30rem !important;
+    max-width: 100%;
   }
 }

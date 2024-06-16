@@ -1,0 +1,25 @@
+:host{
+    &>div{
+        background-color: 
+        color-mix(in srgb, var(--surface-0), transparent 60%);
+            border-radius: var(--border-radius);
+            box-shadow: 3px 3px 6px 
+        color-mix(in srgb, var(--surface-50), var(--surface-100) 80%), -2px -2px 4px var(--surface-0);
+        input,textarea, p-dropdown{
+            width: 100%;
+            max-width: 100%;
+            min-width: 100%;
+            display: block;
+        }
+        textarea{
+            height: 8em;
+            min-height: 4em;
+        }
+    }
+}
+:host ::ng-deep {
+    .p-dropdown{ 
+        width: 100%;
+        max-width: 100%;
+    }
+}
