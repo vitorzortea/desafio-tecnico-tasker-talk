@@ -14,16 +14,16 @@ export const authGuard: CanActivateFn = (route, state) => {
   const token = storage.getItem('JWT_Fake');
   const negado = (): Observable<boolean> => {
     router.navigate(['auth']);
-    storage.clear();
+    //storage.clear();
     return of(false);
   };
 
   if (token) {
     return isTokenValid(crud, token).pipe(
       switchMap(session => {
-        if (session) {
-          if (environment.user?.id != session.userId) {
-            return crud.getID('users', session.userId).pipe(
+        if (session?.UserId) {
+          if (environment.user?.id != session.UserId) {
+            return crud.getID('users', session.UserId).pipe(
               map((user:User) => {
                 environment.user = user;
                 return true;

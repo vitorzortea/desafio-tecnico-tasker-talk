@@ -1,6 +1,28 @@
 .layout-sidebar{
-    max-width: 180px;
+    max-width: 210px;
     width: 100%;
     box-shadow:  4px 4px 8px var(--surface-100);
     border-left: solid 1px var(--surface-100);
+}
+#user-box{
+    line-height: 1em;
+}
+#avatar{
+    width: 50px;
+    height: 50px;
+    border: solid 5px var(--surface-0);
+    border-radius: 50%;
+    background-color: var(--surface-500);
+    position: relative;
+    overflow: hidden;
+    &>span{
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-position:center;
+        background-size: cover;
+    }
 }

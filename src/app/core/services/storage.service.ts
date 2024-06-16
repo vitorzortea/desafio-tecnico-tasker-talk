@@ -8,7 +8,7 @@ export class StorageService {
 
   constructor() { }
 
-  setItem(key:string, value:string):void { this.changeStorage('setItem', key) }
+  setItem(key:string, value:string):void { this.changeStorage('setItem', key, value) }
 
   getItem(key:string):string|null { return (this.changeStorage('getItem', key) as string|null) }
 
