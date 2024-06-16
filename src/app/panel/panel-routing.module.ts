@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PanelComponent } from './panel.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ProjetosComponent } from './projetos/projetos.component';
+
 
 const routes: Routes = [
   {
@@ -10,7 +10,7 @@ const routes: Routes = [
     component:PanelComponent,
     children:[
       {path:'', component:DashboardComponent},
-      {path:'', component:ProjetosComponent},
+      {path:'projetos', loadChildren:()=>import('./projetos/projetos.module').then(m=>m.ProjetosModule)},
     ]
   }
 ];

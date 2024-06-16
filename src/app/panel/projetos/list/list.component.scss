@@ -1,0 +1,39 @@
+:host ::ng-deep{
+    p-card{
+        line-height: 1.2em;
+        .p-card-body, .p-card-content{
+            padding: 0;
+        }
+        .p-fieldset {
+            padding: 0;
+            .p-fieldset-legend{
+                width: 100%;
+                a {
+                    padding: .4em .8em;
+                    font-size: var(--font-size);
+                    font-weight: normal;
+                    justify-content: flex-start;
+                }
+            }
+            .p-fieldset-content {
+                padding: 5px;
+            }
+        }
+        .p-divider.p-divider-horizontal {
+            margin: .6rem 0;
+        }
+        
+    }
+}
+.responsavel{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &>span{
+        margin-top: -15px;
+        background-color: var(--surface-0);
+        padding:0px;
+        font-size: 10px;
+        font-weight: 600;
+    }
+}

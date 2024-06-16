@@ -1,10 +1,17 @@
-.layout-sidebar{
-    max-width: 210px;
-    width: 100%;
-    box-shadow:  4px 4px 8px var(--surface-100);
-    border-left: solid 1px var(--surface-100);
-}
-#user-box{
+:host ::ng-deep{
+    .layout-sidebar{
+        flex: 0 0 210px;
+        .p-card-body {
+            padding: 0;
+            flex: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: space-between;
+        }
+        //box-shadow:  4px 4px 8px var(--surface-100);
+        //border-left: solid 1px var(--surface-100);
+    }
     line-height: 1em;
 }
 #avatar{

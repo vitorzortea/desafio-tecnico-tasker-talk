@@ -1,25 +1,33 @@
 <div class="flex h-screen">
-    <div class="surface-0 layout-sidebar flex flex-column align-items-stretch justify-content-center">
-        <h1 class="px-4 pt-4 pb-2">
-            <img src="../../assets/svg/logo.svg" alt="Tasker Talk" />
-        </h1>
-        <div id="user-box" class="flex py-2 px-3 align-items-center gap-2">
-            <div id="avatar" >
-                <span [ngStyle]="{'background-image': 'url('+user?.avatar+')'}"></span>
+    <p-card class="layout-sidebar flex-autos h-screen" styleClass="h-full p-0 flex flex-column align-items-stretch">
+        <ng-template pTemplate="header" styleClass="p-0">
+            <h1 class="px-4 py-2">
+                <img src="../../assets/svg/logo.svg" alt="Tasker Talk" />
+            </h1>
+            <div id="user-box" class="flex py-2 px-3 align-items-center gap-2">
+                <p-avatar 
+                    [icon]="(!user?.avatar)?'pi pi-user':''" 
+                    styleClass="mr-1" 
+                    size="large"
+                    [image]="user?.avatar"
+                    [style]="{overflow:'hidden', borderRadius:'6px'}" 
+                />
+                <div>
+                    <span><small>Olá!</small> 👋</span>
+                    <p class="font-semibold">{{user?.name}}</p>
+                </div>
             </div>
-            <div>
-                <span><small>Olá!</small> 👋</span>
-                <p class="font-semibold">{{user?.name}}</p>
+        </ng-template>
+        <ng-template pTemplate="content">
+            <div class="flex-auto">
+                <p-menu [model]="items" styleClass="border-none" />
             </div>
-        </div>
-        <div class="flex-auto">
-            <p-menu [model]="items" />
-        </div>
-        <div class="py-3 mt-3">
+        </ng-template>
+        <ng-template pTemplate="footer" styleClass="p-0">
             <p-menu [model]="[{ label: 'Logout', icon: 'pi pi-sign-out'}]" (click)="logOut()" />
-        </div>
-    </div>
-    <div class="flex-auto">
+        </ng-template>
+    </p-card>
+    <div class="flex-auto p-4 h-screen overflow-auto">
         <router-outlet />
     </div>
 </div>

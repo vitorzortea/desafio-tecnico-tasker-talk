@@ -4,7 +4,7 @@
   font-family: "Poppins", sans-serif;
   font-variation-settings: normal;
   --font-family: "Poppins", sans-serif;
-  --font-size: .9rem;
+  --font-size: .8rem;
   --text-color: #5a646e;
   --text-color-secondary: #404448; 
   
@@ -224,7 +224,7 @@ body {
   font-family: 'Poppins', sans-serif;
   font-size: var(--font-size);
   font-weight: normal;
-  line-height: normal;
+  line-height: 1.2em;
   color: var(--surface-700);
   text-align: left;
   background-color: var(--surface-50);

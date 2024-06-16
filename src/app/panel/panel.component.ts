@@ -21,7 +21,7 @@ export class PanelComponent implements OnDestroy {
   ) {
     this.items = [
       { label: 'Painel de Controle', icon: 'pi pi-chart-bar', routerLink:'' },
-      { label: 'Pojetos', icon: 'pi pi-inbox', routerLink:'' },
+      { label: 'Pojetos', icon: 'pi pi-inbox', routerLink:'projetos' },
       { label: 'Tarefas', icon: 'pi pi-list-check', routerLink:'' },
       { label: 'Para Hoje', icon: 'pi pi-calendar-clock', routerLink:'' },
     ];

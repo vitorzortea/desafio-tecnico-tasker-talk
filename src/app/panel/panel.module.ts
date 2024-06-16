@@ -6,6 +6,10 @@ import { PanelComponent } from './panel.component';
 
 import { MenuModule } from 'primeng/menu';
 import { ToastModule } from 'primeng/toast';
+import { CardModule } from 'primeng/card';
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
+
 
 
 @NgModule({
@@ -17,6 +21,9 @@ import { ToastModule } from 'primeng/toast';
     PanelRoutingModule,
     MenuModule,
     ToastModule,
+    CardModule,
+    AvatarModule,
+    AvatarGroupModule,
   ]
 })
 export class PanelModule { }
