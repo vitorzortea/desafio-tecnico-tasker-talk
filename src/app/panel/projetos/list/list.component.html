@@ -78,7 +78,7 @@
                             />                    
                             <div class="flex flex-column gap-1">
                                 <span class="font-bold">
-                                    {{projeto.empresa}} - {{projeto.status}}
+                                    {{projeto.empresa}}
                                     <p-tag 
                                         [value]="(projeto.status!=0)?(projeto.status==1)?'Em Progresso':'Concluída':'Pendente'"
                                         [severity]="(projeto.status!=0)?(projeto.status==1)?'warning':'success':'danger'"
