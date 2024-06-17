@@ -1,0 +1,40 @@
+<p-sidebar [(visible)]="open" (onHide)="onHide()" position="right">
+    <div class="box-dorm px-3 py-4">
+        <h2>Tarefas</h2>
+        <p-divider></p-divider>
+        <form class="grid" [formGroup]="form" (ngSubmit)="null">
+            
+            <div class="p-1 col-4">
+                <p-dropdown
+                formControlName="status"
+                [options]="[
+                    {name:'Pendente', value:0},
+                    {name:'Em Progresso', value:1},
+                    {name:'Concluído', value:2}
+                ]"
+                [showClear]="true"
+                optionLabel="name" 
+                optionValue="value" 
+                placeholder="Status" />
+            </div>
+            <div class="p-1 col-12">
+                <input formControlName="title" class="text-lg" placeholder="Nome" type="text" pInputText />
+            </div>
+            <div class="p-1 col-12">
+                <p-divider></p-divider>
+            </div>
+            <div class="p-1 col-6">
+                <p-calendar formControlName="createdAt" [showClear]="true" />
+            </div>
+            <div class="p-1 col-6">
+                <p-calendar formControlName="endAt" [showClear]="true" />
+            </div>
+            <div class="p-1 col-12">
+                <textarea formControlName="describe" pInputTextarea></textarea>
+            </div>
+            <div class="p-1 col-12">
+                <button (click)="saveTemp()" pButton label="Guardar" icon="pi pi-plus" class="w-full mt-2 mb-3"></button>
+            </div>
+        </form>
+    </div>
+</p-sidebar>

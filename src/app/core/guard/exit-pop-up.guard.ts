@@ -9,6 +9,7 @@ export const exitPopUpGuard: CanActivateFn = async (route, state) => {
   const form:FormGroup = (route as {[key:string]:any})['form'];
 
   if(!form.dirty && form.touched !== true){
+    navigationService.confirmNavigation();
     return true;
   }
   const result = await Swal.fire({

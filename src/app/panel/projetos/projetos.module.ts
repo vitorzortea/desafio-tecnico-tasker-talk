@@ -23,6 +23,9 @@ import { CalendarModule } from 'primeng/calendar';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TaskComponent } from './task/task.component';
+import { TableModule } from 'primeng/table';
+
 
 
 
@@ -33,7 +36,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     ListComponent,
-    EditComponent
+    EditComponent,
+    TaskComponent
   ],
   imports: [
     CommonModule,
@@ -58,6 +62,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CalendarModule,
     InputTextModule,
     InputTextareaModule,
+    TableModule,
   ]
 })
 export class ProjetosModule { }

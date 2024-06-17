@@ -57,9 +57,3 @@
         font-weight: 600;
     }
 }
-:host ::ng-deep{
-    .p-sidebar .p-sidebar-content {
-        padding: 0px !important;
-    }
-}
-.blur{ filter: blur(6px) opacity(0.4);}

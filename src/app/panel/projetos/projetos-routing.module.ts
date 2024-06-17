@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ListComponent } from './list/list.component';
 import { EditComponent } from './edit/edit.component';
 import { exitPopUpGuard } from '../../core/guard/exit-pop-up.guard';
+import { TaskComponent } from './task/task.component';
 
 const routes: Routes = [
   {

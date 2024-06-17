@@ -4,8 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CrudService } from '../../../core/services/crud.service';
 import Swal from 'sweetalert2';
 import { environment } from '../../../../environments/environment';
-import { Subscription } from 'rxjs';
+import { Subscription, forkJoin } from 'rxjs';
 import { NavigationService } from '../../../core/services/navigation-service.service';
+import { Task } from '../../../core/model/task';
+import { Project } from '../../../core/model/project';
 
 type FormProjeto = {
   describe: string;
@@ -38,6 +40,9 @@ type FormProjeto = {
   styleUrl: './edit.component.scss'
 })
 export class EditComponent {
+  creatingTask=false;
+  tasks:any|undefined=[];
+  
   private subscription: Subscription;
   open= true;
   form: FormGroup;
@@ -111,19 +116,41 @@ export class EditComponent {
     }
     this.form.markAllAsTouched();
     if(this.form.valid){
+      console.log(this.tasks);
+      console.log(this.tasks.length);
       const value = this.form.value;
       const save = (value.id) 
-        ? this.crud.put(`users/${value.userId}/project`, value.id, value)
-        : this.crud.post(`users/${value.userId}/project`, value);
+      ? this.crud.put(`users/${value.userId}/project`, value.id, value)
+      : this.crud.post(`users/${value.userId}/project`, value);
       save.subscribe({
         next:(e)=>{
-          this.loadForm(e as FormProjeto);
-          Swal.fire({
-            icon:'success',
-            text:'Projeto Salvo com sucesso'
-          }).then(()=>{
-            this.router.navigate(['../'], {relativeTo: this.activatedRoute});
-          })
+          if(this.tasks.length){
+            console.log(this.tasks);
+            console.log(this.tasks.length);
+            const gets = this.tasks.map((f:Task)=>{
+              console.log('>');
+              return (!f?.id)
+                ? this.crud.post(`users/${value.userId}/project/${(e as Project).id}/Task`, f)
+                : this.crud.put(`users/${value.userId}/project/${(e as Project).id}/Task`, f.id, f)
+            });
+            forkJoin(gets).subscribe(g=>{
+              this.loadForm(e as FormProjeto);
+              Swal.fire({
+                icon:'success',
+                text:'Projeto Salvo com sucesso'
+              }).then(()=>{
+                this.router.navigate(['../'], {relativeTo: this.activatedRoute});
+              })
+            })
+          }else{
+            this.loadForm(e as FormProjeto);
+            Swal.fire({
+              icon:'success',
+              text:'Projeto Salvo com sucesso'
+            }).then(()=>{
+              this.router.navigate(['../'], {relativeTo: this.activatedRoute});
+            })
+          }
         },
         error:()=>{
           Swal.fire({

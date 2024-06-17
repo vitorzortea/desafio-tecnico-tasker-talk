@@ -1,5 +1,5 @@
-:host{
-    &>div{
+:host  ::ng-deep{
+    .box-dorm{
         background-color: 
         color-mix(in srgb, var(--surface-0), transparent 60%);
             border-radius: var(--border-radius);
@@ -16,10 +16,13 @@
             min-height: 4em;
         }
     }
-}
-:host ::ng-deep {
+    
     .p-dropdown{ 
         width: 100%;
         max-width: 100%;
+    }
+    
+    .p-sidebar .p-sidebar-content {
+        padding: 0px !important;
     }
 }

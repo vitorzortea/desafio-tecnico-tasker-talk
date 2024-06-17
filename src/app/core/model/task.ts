@@ -4,7 +4,7 @@ export type Task = {
     endAt:string,
     id?:string,
     projectId:string,
-    status:string,
+    status:number,
     subTasks:string,
     title:string,
     porcent:number

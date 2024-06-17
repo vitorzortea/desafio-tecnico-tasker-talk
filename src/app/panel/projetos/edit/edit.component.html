@@ -1,5 +1,5 @@
 <p-sidebar [(visible)]="open" (onHide)="onHide()" (visibleChange)="($event)" position="right">
-    <div class="px-3 py-4">
+    <div class="box-dorm px-3 py-4">
         <h2>{{title}}</h2>
         <p-divider></p-divider>
         <form class="grid" [formGroup]="form">
@@ -35,25 +35,38 @@
             <div class="p-1 col-12">
                 <textarea formControlName="describe" pInputTextarea></textarea>
             </div>
-            <p-sidebar [(visible)]="sidebarVisible"  position="right">
-                <ng-template pTemplate="header">
-                    <div class="flex align-items-center gap-2">
-                        <p-avatar 
-                        image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" 
-                        shape="circle" />
-                        <span class="font-bold">
-                            Amy Elsner
-                        </span>
-                    </div>
-                </ng-template>
-                <p>
-                    Lorem ipsum dolor sit amet...
-                </p>
-            </p-sidebar>
-            <p-button (click)="sidebarVisible = true" icon="pi pi-plus" />
             <div class="p-1 col-12">
-                <button (click)="submit()" pButton label="Entrar" icon="pi pi-user" class="w-full mt-2 mb-3"></button>
+                <p-button (click)="creatingTask=true" icon="pi pi-plus" label="Aficionar Tarefas" />
+            </div>
+            <div class="p-1 col-12">
+                <button (click)="submit()" pButton label="Salvar" icon="pi pi-user" class="w-full mt-2 mb-3"></button>
+            </div>
+            <div class="p-1 col-12" *ngIf="tasks.length">
+                <p-table [value]="tasks" [tableStyle]="{ 'min-height': '200px' }">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Status</th>
+                            <th>Name</th>
+                            <th>Começo</th>
+                            <th>Fim</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-task>
+                        <tr>
+                            <td>{{ task.status }}</td>
+                            <td>{{ task.title }}</td>
+                            <td>{{ task.createdAt | date }}</td>
+                            <td>{{ task.endAt | date }}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
             </div>
         </form>
     </div>
 </p-sidebar>
+<ng-container *ngIf="creatingTask">
+    <app-task [tasks]="tasks" (close)="
+        tasks = $event || tasks;
+        creatingTask=false;
+    "></app-task>
+</ng-container>

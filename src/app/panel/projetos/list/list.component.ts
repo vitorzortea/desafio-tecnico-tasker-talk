@@ -83,9 +83,13 @@ export class ListComponent {
       const id = projetos[index].id as string;
       this.crud.get(`project/${id}/Task`).subscribe(e=>{
         projetos[index].listTask = (e as TasktList ).items;
-        const newPorcent = (e as TasktList).items.reduce(
+        (e as TasktList).items = (e as TasktList).items.map(f=>{
+          f.porcent = (f.status == 2) ? 100 : 0;
+          return f;
+        });
+        const newPorcent = parseFloat(((e as TasktList).items.reduce(
           (a: number, b: Task, index: number, array: Task[]) => (a || array[index-1]?.porcent || 0) + b.porcent, 0
-        )/(e as TasktList).items.length;
+        )/(e as TasktList).items.length).toFixed(2));
         if(newPorcent !=  projetos[index].porcent){
           (this.projetos as Project[])[index].porcent = newPorcent;
           this.crud.put('project', id, projetos[index]).subscribe();
