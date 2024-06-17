@@ -41,6 +41,11 @@ export class TaskComponent implements AfterViewInit {
       value.porcent = 0;
       this.tasks.push(value);
       this.close.emit(this.tasks);
+    }else{
+      Swal.fire({
+        'icon':'error',
+        'text': 'Formulário deve ser preenchido corretamente',
+      })
     }
   }
   onHide(){

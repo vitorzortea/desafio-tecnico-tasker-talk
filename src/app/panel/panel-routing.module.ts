@@ -9,7 +9,8 @@ const routes: Routes = [
     path:'',
     component:PanelComponent,
     children:[
-      {path:'', component:DashboardComponent},
+      {path:'', pathMatch:'full', redirectTo: 'projetos'},
+      {path:'dashboard', component:DashboardComponent},
       {path:'projetos', loadChildren:()=>import('./projetos/projetos.module').then(m=>m.ProjetosModule)},
     ]
   }
