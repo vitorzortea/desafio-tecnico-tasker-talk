@@ -27,12 +27,7 @@ export class LoginComponent {
   login(){
     if(this.form.valid){
       const value = this.form.value as FormLogin
-      if(this.auth.login(value.email, value.password)){
-        Swal.fire({
-          text: 'Foi!',
-          icon: 'success',
-        })
-      }
+      this.auth.login(value.email, value.password)
     }else{
       Swal.fire({
         text: 'O formulário de login deve ser respondido corretamente.',

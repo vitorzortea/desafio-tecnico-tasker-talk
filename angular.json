@@ -25,6 +25,7 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/desafio-tecnico-tasker-talk",
+            "baseHref": "/desafio-tecnico-tasker-talk/",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [

@@ -78,10 +78,10 @@
                             />                    
                             <div class="flex flex-column gap-1">
                                 <span class="font-bold">
-                                    {{projeto.empresa}} 
+                                    {{projeto.empresa}} - {{projeto.status}}
                                     <p-tag 
-                                        [value]="(projeto.status)?(projeto.status==1)?'Concluída':'Em Progresso':'Pendente'"
-                                        [severity]="(projeto.status)?(projeto.status==1)?'success':'warning':'danger'"
+                                        [value]="(projeto.status!=0)?(projeto.status==1)?'Em Progresso':'Concluída':'Pendente'"
+                                        [severity]="(projeto.status!=0)?(projeto.status==1)?'warning':'success':'danger'"
                                     /></span>
                                 <span class="text-xl font-bold line-height-1">{{projeto.title}}</span>
                                 <span class="text-xs line-height-1">{{projeto.createdAt | date}} - {{projeto.endAt | date}}</span>
